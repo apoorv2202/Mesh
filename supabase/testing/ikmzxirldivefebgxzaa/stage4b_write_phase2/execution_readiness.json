@@ -1,0 +1,14 @@
+{
+  "authorizable": true,
+  "lifecycle_contracts_approved": true,
+  "approved_contract_sha256": "cab704d5511a210dcd39fe3b8ac18d52980f6f49a7600a79b9940c02d166d9cb",
+  "approval_record": "../../../proposals/stage4b_write_phase2/LIFECYCLE_APPROVAL.md",
+  "database_execution_authorized": false,
+  "scope": "rollback-only DDL and human SQL-role tier; no machine LOGIN or real JWT proof",
+  "blockers": [
+    "Eligibility alone is not authorization: a separate explicit TEST-only runtime or cleanup approval and the newly reviewed manifest hash are required",
+    "PostgreSQL SQL compilation and exact deparser/catalog-delta assumptions untested",
+    "Scoped PG17 creator-role provisioning corrected locally; actual Supabase ownership compatibility unverified",
+    "Independent review of new hashes, permission and metadata assertions required"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "purpose": "offline preparation only; not execution authorization",
+  "files": {
+    "01_audit_permissions.sql": "0eb67a8716bc73f1ce911212bc1957a3c44363e77a54c222a8c8a236f1922ffc",
+    "02_reference_integrity.sql": "ed72cd19bb07af353cd7eeacbb8a9bef21719c415079d1a6b401d0c90753ce94",
+    "03_machine_writer_r2.sql": "97844df3d7d06245ac5f5d650b9b05be45b4bebed2e3c8a7920f6abf7b3d996f",
+    "04_human_triage.sql": "8d47915d9f78d5fd0455843013488ffa9c9880ad79d27208074e900fe01a45e3",
+    "build_machine_candidate.py": "de5953a5abdc0073acf69e61056a66a236bf533a5ad9d6189c135f6e811bd4db",
+    "machine_revision_source.json": "d9ebd7b0b98c89a31ad672ee970f377409626475c4170ca54c5b9e715ca1f54c",
+    "machine_support.sql.in": "96d1e04493388562d57a7e28fd2c8f7806ee107977e6567281bd69142ecf525c",
+    "offline_contract_tests.py": "190ce9eaeb5e5968c0f06172b6a60eaa2abbd088acdb37b864b8a23cc55b0fbc",
+    "README.md": "5bdba873997be1c9960e5cfb4ee27e146878f3362259544d6f8b2205a08a1cb2",
+    "validate_offline.py": "d1a3036515240d890e140d0de4dd4de1b8b1c4a8efac14cd624ba7d0f1c038f9",
+    "VALIDATION_REPORT.md": "ef9ddf7b40b48e34d9a6169ad9e57510591ce1e8e2377967f4abc747237d2f39"
+  }
+}

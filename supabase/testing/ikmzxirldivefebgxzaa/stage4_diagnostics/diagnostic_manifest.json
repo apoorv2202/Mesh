@@ -1,0 +1,8 @@
+{
+  "expected_baseline_md5": "90a71db3b16ed177b3455f61a59343b2",
+  "query_sha256": "8c210df9a7f736862461658788026df4f6507ba2b356cb0ca3f41a863c693090",
+  "source_snapshot_sha256": "0bf49de856444814a36eb07c5cc2b5fd655f76fb9beaebd7665ff94f5e6d1bc0",
+  "baseline_sha256": "5416ead6a2814e13dc1ada3de81c9d0fb22eab49be6908bce06d214ae6bcca21",
+  "failed_runtime_receipt_sha256": "58d2696659951ae1c15a8b900f77786cc2662460724fdb3da547c3abc9cac1ca",
+  "failed_runtime_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

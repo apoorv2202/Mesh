@@ -1,0 +1,508 @@
+-- Phase2 candidate; not executed.
+-- Revised Migration02 candidate, TEST review only. Original proposal preserved.
+-- REVIEW-ONLY PROPOSAL, not applied. PostgreSQL 17 / existing inspected schema.
+-- Depends on 01 and the direct-login, per-tenant provisioning contract in README.
+-- No passwords, login roles, tenant bindings or extension installations here.
+BEGIN;
+SET LOCAL lock_timeout = '5s';
+SET LOCAL statement_timeout = '60s';
+DO $guard$
+BEGIN
+ IF current_user<>'postgres' OR session_user<>'postgres' OR current_database()<>'postgres'
+ OR current_setting('mesh_review.test_ref',true) IS DISTINCT FROM 'ikmzxirldivefebgxzaa'
+ OR current_setting('mesh_review.writer_approved',true) IS DISTINCT FROM 'on'
+ OR current_setting('mesh_review.audit_hardening_approved',true) IS DISTINCT FROM 'on' THEN
+  RAISE EXCEPTION 'Review-only proposal: writer review gate is closed';
+ END IF;
+END
+$guard$;
+
+-- Verified sequence/identity baseline; fail closed if 01 was skipped or drifted.
+-- This does not prove CREATE ROLE/ownership-transfer capability or connectivity.
+DO $baseline$
+DECLARE api_role record; target record; privilege text;
+BEGIN
+ IF current_setting('server_version_num')::integer / 10000 <> 17 THEN
+  RAISE EXCEPTION 'Expected reviewed PostgreSQL 17 environment';
+ END IF;
+ IF (SELECT count(*) FROM pg_catalog.pg_roles
+     WHERE rolname IN ('anon','authenticated','service_role'))<>3 THEN
+  RAISE EXCEPTION 'Expected API role inventory changed';
+ END IF;
+ IF (SELECT count(*) FROM pg_catalog.pg_class c
+     JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+     WHERE n.nspname='public' AND c.relkind='r' AND c.relrowsecurity
+       AND pg_catalog.pg_get_userbyid(c.relowner)='postgres'
+       AND c.relname IN ('security_events','security_findings','security_incidents',
+                        'incident_events','security_risk_scores'))<>5 THEN
+  RAISE EXCEPTION 'Expected VADER table ownership/RLS inventory changed';
+ END IF;
+ IF NOT EXISTS(SELECT 1 FROM pg_catalog.pg_class c
+   JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+   WHERE n.nspname='public' AND c.relname='security_incidents_incident_number_seq'
+     AND c.relkind='S' AND pg_catalog.pg_get_userbyid(c.relowner)='postgres')
+   OR pg_catalog.pg_get_serial_sequence('public.security_incidents','incident_number')
+      IS DISTINCT FROM 'public.security_incidents_incident_number_seq'
+   OR NOT EXISTS(SELECT 1 FROM pg_catalog.pg_attribute
+      WHERE attrelid='public.security_incidents'::regclass
+        AND attname='incident_number' AND attidentity='a' AND NOT attisdropped) THEN
+  RAISE EXCEPTION 'Incident identity/sequence differs from verified baseline';
+ END IF;
+ IF pg_catalog.to_regprocedure('extensions.uuid_generate_v5(uuid,text)') IS NULL
+    OR pg_catalog.to_regprocedure('extensions.digest(bytea,text)') IS NULL THEN
+  RAISE EXCEPTION 'Required reviewed extension function signature missing';
+ END IF;
+ FOR api_role IN SELECT oid,rolname FROM pg_catalog.pg_roles
+                 WHERE rolname IN ('anon','authenticated','service_role') LOOP
+  FOR target IN SELECT c.oid FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND c.relname IN
+      ('security_events','security_findings','security_incidents','incident_events','security_risk_scores') LOOP
+   FOREACH privilege IN ARRAY ARRAY['TRUNCATE','REFERENCES','TRIGGER','MAINTAIN'] LOOP
+    IF pg_catalog.has_table_privilege(api_role.oid,target.oid,privilege) THEN
+     RAISE EXCEPTION 'Security hardening prerequisite not satisfied';
+    END IF;
+   END LOOP;
+   IF api_role.rolname IN ('anon','authenticated') AND
+      (pg_catalog.has_any_column_privilege(api_role.oid,target.oid,'INSERT')
+       OR pg_catalog.has_any_column_privilege(api_role.oid,target.oid,'UPDATE')
+       OR pg_catalog.has_table_privilege(api_role.oid,target.oid,'DELETE')) THEN
+    RAISE EXCEPTION 'Unexpected frontend write path before writer installation';
+   END IF;
+  END LOOP;
+ END LOOP;
+END
+$baseline$;
+
+-- Fail on name collisions; do not silently reuse an existing privileged role.
+SET LOCAL createrole_self_grant='set,inherit';
+CREATE ROLE vader_writer_owner NOLOGIN NOSUPERUSER NOBYPASSRLS NOCREATEDB NOCREATEROLE NOINHERIT;
+CREATE ROLE vader_ingest NOLOGIN NOSUPERUSER NOBYPASSRLS NOCREATEDB NOCREATEROLE NOINHERIT;
+DO $ownership_capability$ BEGIN
+ IF NOT pg_has_role('postgres','vader_writer_owner','SET')
+ OR NOT pg_has_role('postgres','vader_writer_owner','USAGE') THEN
+ RAISE EXCEPTION 'Scoped writer SET/INHERIT capability absent'; END IF;
+END $ownership_capability$;
+CREATE SCHEMA vader_private;
+CREATE SCHEMA vader_api;
+REVOKE ALL ON SCHEMA vader_private,vader_api FROM PUBLIC,anon,authenticated,service_role;
+-- Narrow dependency grant: schema lookup for UUIDv5 and digest only.
+-- No PUBLIC access, CREATE, grant option, or extension function ACL change.
+GRANT USAGE ON SCHEMA extensions TO vader_writer_owner;
+-- public USAGE already exists via PUBLIC; do not alter its ACL.
+DO $usage$ BEGIN
+ IF NOT has_schema_privilege('vader_writer_owner','public','USAGE')
+ OR NOT has_schema_privilege('vader_writer_owner','extensions','USAGE') THEN
+ RAISE EXCEPTION 'Native schema USAGE prerequisite absent'; END IF;
+END $usage$;
+GRANT USAGE ON SCHEMA vader_private,vader_api TO vader_writer_owner;
+-- Required while transferring function ownership; removed before COMMIT.
+GRANT CREATE ON SCHEMA vader_private,vader_api TO vader_writer_owner;
+GRANT USAGE ON SCHEMA vader_api TO vader_ingest;
+-- Do NOT add either schema to PostgREST exposed schemas.
+
+-- New private authorization configuration, not an existing application table.
+-- Admin-only provisioning: one dedicated database LOGIN maps to one tenant.
+-- Both OID and name are checked to fail closed after role drop/recreation.
+CREATE TABLE vader_private.principals (
+ principal_oid oid PRIMARY KEY,
+ principal_name name NOT NULL UNIQUE,
+ organization_id uuid NOT NULL REFERENCES public.organizations(id),
+ enabled boolean NOT NULL DEFAULT false
+);
+REVOKE ALL ON vader_private.principals FROM PUBLIC,anon,authenticated,service_role,vader_ingest;
+GRANT SELECT ON vader_private.principals TO vader_writer_owner;
+
+-- Template injected into the revised, standalone Migration02 candidate.
+ALTER TABLE vader_private.principals ENABLE ROW LEVEL SECURITY;
+CREATE POLICY vader_principal_self_read ON vader_private.principals FOR SELECT TO vader_writer_owner
+ USING (principal_oid=(SELECT oid FROM pg_catalog.pg_roles WHERE rolname=session_user)
+        AND principal_name=session_user AND enabled);
+
+-- Narrow privileged authorization/locking helper. No API caller EXECUTE.
+-- postgres ownership permits row SHARE locks without granting config UPDATE to writer.
+CREATE FUNCTION vader_private.machine_scope_v1() RETURNS uuid
+LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog,pg_temp AS $fn$
+DECLARE principal record; tenant uuid;
+BEGIN
+ SELECT oid,rolname,rolcanlogin,rolsuper,rolbypassrls,rolcreaterole,rolcreatedb
+ INTO principal FROM pg_catalog.pg_roles WHERE rolname=session_user;
+ IF NOT FOUND OR NOT principal.rolcanlogin OR principal.rolsuper OR principal.rolbypassrls
+ OR principal.rolcreaterole OR principal.rolcreatedb OR principal.rolname IN
+ ('postgres','authenticator','anon','authenticated','service_role') THEN
+ RAISE EXCEPTION USING ERRCODE='42501',MESSAGE='VADER machine denied'; END IF;
+ IF EXISTS(SELECT 1 FROM pg_catalog.pg_roles other WHERE other.oid<>principal.oid
+ AND other.rolname<>'vader_ingest' AND pg_catalog.pg_has_role(principal.oid,other.oid,'MEMBER')) THEN
+ RAISE EXCEPTION USING ERRCODE='42501',MESSAGE='VADER machine membership denied'; END IF;
+ SELECT p.organization_id INTO tenant FROM vader_private.principals p
+ WHERE p.principal_oid=principal.oid AND p.principal_name=principal.rolname AND p.enabled FOR SHARE;
+ IF tenant IS NULL THEN RAISE EXCEPTION USING ERRCODE='42501',MESSAGE='VADER machine binding denied'; END IF;
+ PERFORM 1 FROM public.organizations WHERE id=tenant AND status='active' FOR SHARE;
+ IF NOT FOUND THEN RAISE EXCEPTION USING ERRCODE='42501',MESSAGE='VADER organization denied'; END IF;
+ RETURN tenant;
+END $fn$;
+REVOKE ALL ON FUNCTION vader_private.machine_scope_v1() FROM PUBLIC,anon,authenticated,service_role,vader_ingest;
+GRANT EXECUTE ON FUNCTION vader_private.machine_scope_v1() TO vader_writer_owner;
+
+
+CREATE FUNCTION vader_private.tenant_v1() RETURNS uuid
+LANGUAGE plpgsql SECURITY DEFINER SET search_path = pg_catalog, pg_temp AS $fn$
+BEGIN
+ RETURN vader_private.machine_scope_v1();
+END
+$fn$;
+ALTER FUNCTION vader_private.tenant_v1() OWNER TO vader_writer_owner;
+REVOKE ALL ON FUNCTION vader_private.tenant_v1() FROM PUBLIC,anon,authenticated,service_role,vader_ingest;
+
+GRANT INSERT(id,organization_id,actor_user_id,action,target_type,target_id,metadata)
+ ON public.audit_logs TO vader_writer_owner;
+CREATE POLICY vader_machine_audit_insert ON public.audit_logs FOR INSERT TO vader_writer_owner
+ WITH CHECK (organization_id=vader_private.tenant_v1() AND actor_user_id IS NULL);
+
+CREATE FUNCTION vader_private.append_machine_audit_v1(action_name text,target_kind text,target_key text,request_id uuid)
+RETURNS uuid LANGUAGE plpgsql SECURITY INVOKER SET search_path=pg_catalog,pg_temp AS $fn$
+DECLARE audit_id uuid:=gen_random_uuid(); tenant uuid:=vader_private.tenant_v1();
+BEGIN
+ IF action_name IS NULL OR target_kind IS NULL OR action_name NOT IN ('event_ingested','finding_created','incident_created','incident_link_created','risk_created')
+ OR target_kind NOT IN ('security_events','security_findings','security_incidents','incident_events','security_risk_scores')
+ OR target_key IS NULL OR request_id IS NULL THEN RAISE EXCEPTION 'Invalid internal audit descriptor'; END IF;
+ INSERT INTO public.audit_logs(id,organization_id,actor_user_id,action,target_type,target_id,metadata)
+ VALUES(audit_id,tenant,NULL,'vader.'||action_name,target_kind,target_key,
+ jsonb_build_object('request_id',request_id,'principal_name',session_user,
+ 'principal_oid',(SELECT oid FROM pg_catalog.pg_roles WHERE rolname=session_user),
+ 'operation_version','vader-machine-write-r2'));
+ RETURN audit_id;
+END $fn$;
+ALTER FUNCTION vader_private.append_machine_audit_v1(text,text,text,uuid) OWNER TO vader_writer_owner;
+REVOKE ALL ON FUNCTION vader_private.append_machine_audit_v1(text,text,text,uuid)
+ FROM PUBLIC,anon,authenticated,service_role,vader_ingest;
+
+-- Durable payload equality and bundle receipts: written in the SAME transaction
+-- as their application rows. No partially committed receipt can acknowledge work.
+CREATE TABLE vader_private.receipts (
+ organization_id uuid NOT NULL REFERENCES public.organizations(id),
+ kind text NOT NULL CHECK (kind IN ('bundle','event','finding','incident','risk')),
+ object_id uuid NOT NULL,
+ payload jsonb NOT NULL,
+ response jsonb,
+ PRIMARY KEY(organization_id,kind,object_id)
+);
+REVOKE ALL ON vader_private.receipts FROM PUBLIC,anon,authenticated,service_role,vader_ingest;
+GRANT SELECT,INSERT,UPDATE ON vader_private.receipts TO vader_writer_owner;
+ALTER TABLE vader_private.receipts ENABLE ROW LEVEL SECURITY;
+CREATE POLICY vader_receipt_scope ON vader_private.receipts TO vader_writer_owner
+ USING (organization_id=vader_private.tenant_v1())
+ WITH CHECK (organization_id=vader_private.tenant_v1());
+
+-- Reference-integrity proposal must already be validated; never duplicate DDL.
+DO $integrity$ BEGIN
+ IF (SELECT count(*) FROM pg_constraint WHERE convalidated AND contype='f' AND
+ ((conrelid='public.security_risk_scores'::regclass AND conname='vader_risk_finding_tenant_fk' AND confrelid='public.security_findings'::regclass)
+ OR (conrelid='public.security_risk_scores'::regclass AND conname='vader_risk_incident_tenant_fk' AND confrelid='public.security_incidents'::regclass)
+ OR (conrelid='public.security_incidents'::regclass AND conname='vader_assignee_tenant_fk' AND confrelid='public.organization_members'::regclass)))<>3 THEN
+ RAISE EXCEPTION 'Reference integrity proposal not installed/validated'; END IF;
+ IF EXISTS(SELECT 1 FROM pg_roles r CROSS JOIN unnest(ARRAY['TRUNCATE','REFERENCES','TRIGGER','MAINTAIN','INSERT','UPDATE','DELETE']) p(privilege)
+ WHERE r.rolname IN ('anon','authenticated','authenticator','service_role')
+ AND has_table_privilege(r.oid,'public.audit_logs',p.privilege)) THEN RAISE EXCEPTION 'Audit hardening prerequisite missing'; END IF;
+END $integrity$;
+
+GRANT SELECT ON public.security_events,public.security_findings,
+ public.security_incidents,public.incident_events,public.security_risk_scores TO vader_writer_owner;
+GRANT INSERT(id,organization_id,source,external_event_id,event_type,actor_identifier,source_ip,event_time,details) ON public.security_events TO vader_writer_owner;
+GRANT INSERT(id,organization_id,source_event_id,title,description,finding_type,severity,evidence) ON public.security_findings TO vader_writer_owner;
+GRANT INSERT(id,organization_id,title,description,severity,risk_score,confidence,summary) ON public.security_incidents TO vader_writer_owner;
+GRANT INSERT(organization_id,incident_id,event_id) ON public.incident_events TO vader_writer_owner;
+GRANT INSERT(id,organization_id,subject_type,subject_id,score,confidence,factors,explanation,model_version) ON public.security_risk_scores TO vader_writer_owner;
+-- The sequence is present in the export; do not guess or recreate it.
+GRANT USAGE ON SEQUENCE public.security_incidents_incident_number_seq TO vader_writer_owner;
+DO $extension_usage$ BEGIN
+ IF NOT has_function_privilege('vader_writer_owner','extensions.uuid_generate_v5(uuid,text)','EXECUTE')
+ OR NOT has_function_privilege('vader_writer_owner','extensions.digest(bytea,text)','EXECUTE') THEN
+ RAISE EXCEPTION 'Existing extension EXECUTE prerequisite absent'; END IF;
+END $extension_usage$;
+CREATE POLICY vader_writer_select ON public.security_events FOR SELECT TO vader_writer_owner
+ USING (organization_id=vader_private.tenant_v1());
+CREATE POLICY vader_writer_insert ON public.security_events FOR INSERT TO vader_writer_owner
+ WITH CHECK (organization_id=vader_private.tenant_v1());
+CREATE POLICY vader_writer_select ON public.security_findings FOR SELECT TO vader_writer_owner
+ USING (organization_id=vader_private.tenant_v1());
+CREATE POLICY vader_writer_insert ON public.security_findings FOR INSERT TO vader_writer_owner
+ WITH CHECK (organization_id=vader_private.tenant_v1());
+CREATE POLICY vader_writer_select ON public.security_incidents FOR SELECT TO vader_writer_owner
+ USING (organization_id=vader_private.tenant_v1());
+CREATE POLICY vader_writer_insert ON public.security_incidents FOR INSERT TO vader_writer_owner
+ WITH CHECK (organization_id=vader_private.tenant_v1());
+CREATE POLICY vader_writer_select ON public.incident_events FOR SELECT TO vader_writer_owner
+ USING (organization_id=vader_private.tenant_v1());
+CREATE POLICY vader_writer_insert ON public.incident_events FOR INSERT TO vader_writer_owner
+ WITH CHECK (organization_id=vader_private.tenant_v1());
+CREATE POLICY vader_writer_select ON public.security_risk_scores FOR SELECT TO vader_writer_owner
+ USING (organization_id=vader_private.tenant_v1());
+CREATE POLICY vader_writer_insert ON public.security_risk_scores FOR INSERT TO vader_writer_owner
+ WITH CHECK (organization_id=vader_private.tenant_v1());
+
+CREATE FUNCTION vader_private.id_v1(kind text, tenant uuid, identity_parts jsonb) RETURNS uuid
+LANGUAGE sql IMMUTABLE STRICT SET search_path = pg_catalog, pg_temp AS $fn$
+ SELECT extensions.uuid_generate_v5('95980ed1-c0d3-5b64-90cc-9ea71f7b0385'::uuid,
+   jsonb_build_array('mesh-vader-storage-v1',kind,tenant,identity_parts)::text)
+$fn$;
+ALTER FUNCTION vader_private.id_v1(text,uuid,jsonb) OWNER TO vader_writer_owner;
+REVOKE ALL ON FUNCTION vader_private.id_v1(text,uuid,jsonb) FROM PUBLIC,anon,authenticated,service_role,vader_ingest;
+
+CREATE FUNCTION vader_private.claim_v1(kind text, id uuid, body jsonb) RETURNS boolean
+LANGUAGE plpgsql SECURITY INVOKER SET search_path = pg_catalog, pg_temp AS $fn$
+DECLARE inserted integer; prior jsonb; tenant uuid := vader_private.tenant_v1();
+BEGIN
+ INSERT INTO vader_private.receipts(organization_id,kind,object_id,payload)
+ VALUES(tenant,kind,id,body) ON CONFLICT DO NOTHING;
+ GET DIAGNOSTICS inserted=ROW_COUNT;
+ IF inserted=1 THEN RETURN true; END IF;
+ SELECT payload INTO prior FROM vader_private.receipts
+ WHERE organization_id=tenant AND receipts.kind=claim_v1.kind AND object_id=id;
+ IF prior IS DISTINCT FROM body THEN
+  RAISE EXCEPTION USING ERRCODE='22000', MESSAGE='Immutable VADER identity payload conflict';
+ END IF;
+ RETURN false;
+END
+$fn$;
+ALTER FUNCTION vader_private.claim_v1(text,uuid,jsonb) OWNER TO vader_writer_owner;
+REVOKE ALL ON FUNCTION vader_private.claim_v1(text,uuid,jsonb) FROM PUBLIC,anon,authenticated,service_role,vader_ingest;
+
+-- Read and lock history within an EXPLICIT transaction held open by one direct
+-- database session through Python computation and commit_bundle_v1. This is not
+-- an HTTP RPC workflow. Tenant-wide lock avoids cross-actor lock-order deadlocks.
+CREATE FUNCTION vader_api.read_history_v1(actor text, from_time timestamptz, to_time timestamptz)
+RETURNS jsonb LANGUAGE plpgsql SECURITY DEFINER
+SET search_path=pg_catalog,pg_temp SET timezone='UTC' AS $fn$
+DECLARE tenant uuid := vader_private.tenant_v1(); rows jsonb;
+BEGIN
+ IF actor IS NULL OR btrim(actor)='' OR from_time IS NULL OR to_time IS NULL
+    OR to_time<from_time OR to_time-from_time>interval '120 minutes' THEN
+  RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Invalid bounded history scope';
+ END IF;
+ PERFORM pg_advisory_xact_lock(hashtextextended(tenant::text,0));
+ SELECT coalesce(jsonb_agg(to_jsonb(e) ORDER BY event_time,id),'[]'::jsonb) INTO rows
+ FROM (SELECT * FROM public.security_events WHERE organization_id=tenant
+       AND actor_identifier=actor AND event_time BETWEEN from_time AND to_time
+       ORDER BY event_time,id LIMIT 1001) e;
+ IF jsonb_array_length(rows)>1000 THEN
+  RAISE EXCEPTION USING ERRCODE='54000', MESSAGE='History scope exceeds bounded writer limit';
+ END IF;
+ RETURN jsonb_build_object('events',rows,'revision',encode(extensions.digest(convert_to(rows::text,'UTF8'),'sha256'),'hex'));
+END
+$fn$;
+ALTER FUNCTION vader_api.read_history_v1(text,timestamptz,timestamptz) OWNER TO vader_writer_owner;
+REVOKE ALL ON FUNCTION vader_api.read_history_v1(text,timestamptz,timestamptz) FROM PUBLIC,anon,authenticated,service_role;
+GRANT EXECUTE ON FUNCTION vader_api.read_history_v1(text,timestamptz,timestamptz) TO vader_ingest;
+
+-- Payload: request_key, actor, history_from, history_to, history_revision,
+-- events[], findings[], incidents[], risks[]. All four arrays REQUIRED (empty OK).
+-- Flat entity objects use the allowlists below. IDs are computed by the database.
+-- Typed event_id/subject_id references must come from persisted history or the
+-- documented id_v1 test vectors; never use caller organization as authorization.
+CREATE FUNCTION vader_api.commit_bundle_v1(bundle jsonb) RETURNS jsonb
+LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog,pg_temp SET timezone='UTC' AS $fn$
+DECLARE
+ tenant uuid := vader_private.tenant_v1(); batch uuid; prior jsonb; response jsonb;
+ item jsonb; payload jsonb; id uuid; history jsonb; fresh boolean; k text;
+ e public.security_events; f public.security_findings; i public.security_incidents; r public.security_risk_scores;
+ event_ids uuid[]; linked uuid; previous_time timestamptz; ev public.security_events;
+ result_events jsonb:='[]'; result_findings jsonb:='[]'; result_incidents jsonb:='[]'; result_risks jsonb:='[]';
+ result_audits jsonb:='[]'; link_created int;
+BEGIN
+ IF jsonb_typeof(bundle) IS DISTINCT FROM 'object' OR octet_length(bundle::text)>1048576 THEN
+  RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Invalid or oversized VADER bundle';
+ END IF;
+ IF EXISTS(SELECT 1 FROM jsonb_object_keys(bundle) z(key) WHERE key NOT IN
+ ('request_key','actor','history_from','history_to','history_revision','events','findings','incidents','risks'))
+ OR coalesce(btrim(bundle->>'request_key'),'')='' OR coalesce(btrim(bundle->>'actor'),'')='' THEN
+  RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Invalid bundle keys';
+ END IF;
+ FOREACH k IN ARRAY ARRAY['events','findings','incidents','risks'] LOOP
+  IF jsonb_typeof(bundle->k) IS DISTINCT FROM 'array' THEN
+   RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Required entity array missing';
+  END IF;
+  IF jsonb_array_length(bundle->k)>100 THEN
+   RAISE EXCEPTION USING ERRCODE='54000', MESSAGE='Entity array limit exceeded';
+  END IF;
+ END LOOP;
+ PERFORM pg_advisory_xact_lock(hashtextextended(tenant::text,0));
+ batch:=vader_private.id_v1('bundle',tenant,jsonb_build_array(bundle->>'request_key'));
+ IF NOT vader_private.claim_v1('bundle',batch,bundle) THEN
+  SELECT receipts.response INTO response FROM vader_private.receipts
+   WHERE organization_id=tenant AND kind='bundle' AND object_id=batch;
+  IF response IS NULL THEN RAISE EXCEPTION 'Incomplete receipt'; END IF;
+  RETURN response;
+ END IF;
+ history:=vader_api.read_history_v1(bundle->>'actor',(bundle->>'history_from')::timestamptz,
+                                  (bundle->>'history_to')::timestamptz);
+ IF bundle->>'history_revision' IS DISTINCT FROM history->>'revision' THEN
+  RAISE EXCEPTION USING ERRCODE='40001', MESSAGE='Stale history revision; reload and recompute';
+ END IF;
+
+ FOR item IN SELECT value FROM jsonb_array_elements(bundle->'events') LOOP
+  IF jsonb_typeof(item) IS DISTINCT FROM 'object' THEN RAISE EXCEPTION 'Invalid event object'; END IF;
+  IF EXISTS(SELECT 1 FROM jsonb_object_keys(item) z(key) WHERE key NOT IN ('source','external_event_id','event_type','actor_identifier','source_ip','event_time','details')) THEN
+   RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Unknown event field';
+  END IF;
+  SELECT * INTO e FROM jsonb_populate_record(NULL::public.security_events,item);
+  IF e.source IS NULL OR btrim(e.source)='' OR e.external_event_id IS NULL OR btrim(e.external_event_id)='' OR e.actor_identifier IS DISTINCT FROM bundle->>'actor' OR e.event_time IS NULL OR e.event_type NOT IN ('login','privilege_escalation','sensitive_resource_access','data_transfer') OR e.event_type IS NULL OR jsonb_typeof(e.details) IS DISTINCT FROM 'object' THEN
+   RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Invalid event fields';
+  END IF;
+  IF e.event_time NOT BETWEEN (bundle->>'history_from')::timestamptz AND (bundle->>'history_to')::timestamptz
+     OR (item->>'event_time') !~ '(Z|[+-][0-9]{2}:[0-9]{2})$' THEN
+   RAISE EXCEPTION 'Event time outside scope or missing explicit timezone';
+  END IF;
+  IF (e.event_type='login' AND (jsonb_typeof(e.details->'failed_attempts') IS DISTINCT FROM 'number'
+        OR (e.details->>'failed_attempts') !~ '^[0-9]+$'))
+     OR (e.event_type IN ('privilege_escalation','sensitive_resource_access')
+        AND jsonb_typeof(e.details->'authorized') IS DISTINCT FROM 'boolean')
+     OR (e.event_type='data_transfer' AND (jsonb_typeof(e.details->'bytes_transferred') IS DISTINCT FROM 'number'
+        OR (e.details->>'bytes_transferred') !~ '^[0-9]+$')) THEN
+   RAISE EXCEPTION 'Invalid event-specific details';
+  END IF;
+  id:=vader_private.id_v1('event',tenant,jsonb_build_array(e.source,e.external_event_id));
+  payload:=jsonb_build_object('source',e.source,'external_event_id',e.external_event_id,'event_type',e.event_type,'actor_identifier',e.actor_identifier,'source_ip',e.source_ip,'event_time',e.event_time,'details',e.details);
+  fresh:=vader_private.claim_v1('event',id,payload);
+  IF fresh THEN
+   INSERT INTO public.security_events(id,organization_id,source,external_event_id,event_type,actor_identifier,source_ip,event_time,details)
+   VALUES(id,tenant,e.source,e.external_event_id,e.event_type,e.actor_identifier,e.source_ip,e.event_time,e.details);
+   result_audits:=result_audits || jsonb_build_array(vader_private.append_machine_audit_v1('event_ingested','security_events',id::text,batch));
+  ELSIF NOT EXISTS(SELECT 1 FROM public.security_events WHERE organization_id=tenant AND security_events.id=commit_bundle_v1.id) THEN
+   RAISE EXCEPTION 'Receipt row missing; administrative reconciliation required';
+  END IF;
+  result_events:=result_events || jsonb_build_array(id);
+ END LOOP;
+
+ FOR item IN SELECT value FROM jsonb_array_elements(bundle->'findings') LOOP
+  IF jsonb_typeof(item) IS DISTINCT FROM 'object' THEN RAISE EXCEPTION 'Invalid finding object'; END IF;
+  IF EXISTS(SELECT 1 FROM jsonb_object_keys(item) z(key) WHERE key NOT IN ('source_event_id','title','description','finding_type','severity','evidence')) THEN
+   RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Unknown finding field';
+  END IF;
+  SELECT * INTO f FROM jsonb_populate_record(NULL::public.security_findings,item);
+  IF f.source_event_id IS NULL OR coalesce(btrim(f.title),'')='' OR coalesce(btrim(f.finding_type),'')='' OR f.severity IS NULL OR jsonb_typeof(f.evidence) IS DISTINCT FROM 'object' OR coalesce(btrim(f.evidence->>'detector_version'),'')='' THEN
+   RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Invalid finding fields';
+  END IF;
+  IF NOT EXISTS(SELECT 1 FROM public.security_events WHERE organization_id=tenant AND security_events.id=f.source_event_id
+    AND actor_identifier=bundle->>'actor' AND event_time BETWEEN (bundle->>'history_from')::timestamptz AND (bundle->>'history_to')::timestamptz) THEN
+   RAISE EXCEPTION USING ERRCODE='23503',MESSAGE='Finding event outside authorized scope';
+  END IF;
+  id:=vader_private.id_v1('finding',tenant,jsonb_build_array(f.source_event_id,f.finding_type,f.evidence->>'detector_version'));
+  payload:=jsonb_build_object('source_event_id',f.source_event_id,'title',f.title,'description',f.description,'finding_type',f.finding_type,'severity',f.severity,'evidence',f.evidence);
+  fresh:=vader_private.claim_v1('finding',id,payload);
+  IF fresh THEN
+   INSERT INTO public.security_findings(id,organization_id,source_event_id,title,description,finding_type,severity,evidence)
+   VALUES(id,tenant,f.source_event_id,f.title,f.description,f.finding_type,f.severity,f.evidence);
+   result_audits:=result_audits || jsonb_build_array(vader_private.append_machine_audit_v1('finding_created','security_findings',id::text,batch));
+  ELSIF NOT EXISTS(SELECT 1 FROM public.security_findings WHERE organization_id=tenant AND security_findings.id=commit_bundle_v1.id) THEN
+   RAISE EXCEPTION 'Receipt row missing; administrative reconciliation required';
+  END IF;
+  result_findings:=result_findings || jsonb_build_array(id);
+ END LOOP;
+
+ FOR item IN SELECT value FROM jsonb_array_elements(bundle->'incidents') LOOP
+  IF jsonb_typeof(item) IS DISTINCT FROM 'object' THEN RAISE EXCEPTION 'Invalid incident object'; END IF;
+  IF EXISTS(SELECT 1 FROM jsonb_object_keys(item) z(key) WHERE key NOT IN ('title','description','severity','risk_score','confidence','summary')) THEN
+   RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Unknown incident field';
+  END IF;
+  SELECT * INTO i FROM jsonb_populate_record(NULL::public.security_incidents,item);
+  IF coalesce(btrim(i.title),'')='' OR i.severity IS NULL OR jsonb_typeof(i.summary) IS DISTINCT FROM 'object' OR coalesce(btrim(i.summary->>'correlation_version'),'')='' OR jsonb_typeof(i.summary->'ordered_event_ids') IS DISTINCT FROM 'array' THEN
+   RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Invalid incident fields';
+  END IF;
+  IF jsonb_array_length(i.summary->'ordered_event_ids')<>4 THEN RAISE EXCEPTION 'Four-stage chain required'; END IF;
+  SELECT array_agg(value::uuid ORDER BY ord) INTO event_ids
+   FROM jsonb_array_elements_text(i.summary->'ordered_event_ids') WITH ORDINALITY z(value,ord);
+  -- Canonical UUID values, not caller JSON spelling/case, define chain identity.
+  i.summary:=jsonb_set(i.summary,'{ordered_event_ids}',to_jsonb(event_ids));
+  IF (SELECT count(DISTINCT u) FROM unnest(event_ids) u)<>4 THEN RAISE EXCEPTION 'Duplicate chain event'; END IF;
+  previous_time:=NULL;
+  FOREACH linked IN ARRAY event_ids LOOP
+   SELECT * INTO ev FROM public.security_events WHERE organization_id=tenant AND security_events.id=linked
+    AND actor_identifier=bundle->>'actor'
+    AND event_time BETWEEN (bundle->>'history_from')::timestamptz AND (bundle->>'history_to')::timestamptz;
+   IF NOT FOUND OR (previous_time IS NOT NULL AND ev.event_time<=previous_time) THEN
+    RAISE EXCEPTION USING ERRCODE='23503',MESSAGE='Chain event outside ordered tenant scope';
+   END IF;
+   IF (CASE array_position(event_ids,linked)
+     WHEN 1 THEN ev.event_type='login' AND (ev.details->>'failed_attempts')::numeric>=5
+     WHEN 2 THEN ev.event_type='privilege_escalation' AND ev.details->'authorized'='false'::jsonb
+     WHEN 3 THEN ev.event_type='sensitive_resource_access' AND ev.details->'authorized'='false'::jsonb
+     WHEN 4 THEN ev.event_type='data_transfer' AND (ev.details->>'bytes_transferred')::numeric>=1000000000
+     ELSE false END) IS NOT TRUE THEN
+    RAISE EXCEPTION 'Chain stages do not match Phase 1 demonstration rules';
+   END IF;
+   previous_time:=ev.event_time;
+  END LOOP;
+  IF (SELECT max(event_time)-min(event_time) FROM public.security_events WHERE organization_id=tenant AND security_events.id=ANY(event_ids))>interval '60 minutes' THEN
+   RAISE EXCEPTION 'Chain exceeds correlation window';
+  END IF;
+  id:=vader_private.id_v1('incident',tenant,jsonb_build_array(i.summary->'ordered_event_ids',i.summary->>'correlation_version'));
+  payload:=jsonb_build_object('title',i.title,'description',i.description,'severity',i.severity,'risk_score',i.risk_score,'confidence',i.confidence,'summary',i.summary);
+  fresh:=vader_private.claim_v1('incident',id,payload);
+  IF fresh THEN
+   INSERT INTO public.security_incidents(id,organization_id,title,description,severity,risk_score,confidence,summary)
+   VALUES(id,tenant,i.title,i.description,i.severity,i.risk_score,i.confidence,i.summary);
+   result_audits:=result_audits || jsonb_build_array(vader_private.append_machine_audit_v1('incident_created','security_incidents',id::text,batch));
+  ELSIF NOT EXISTS(SELECT 1 FROM public.security_incidents WHERE organization_id=tenant AND security_incidents.id=commit_bundle_v1.id) THEN
+   RAISE EXCEPTION 'Receipt row missing; administrative reconciliation required';
+  END IF;
+  result_incidents:=result_incidents || jsonb_build_array(id);
+  FOREACH linked IN ARRAY event_ids LOOP
+   INSERT INTO public.incident_events(organization_id,incident_id,event_id)
+    VALUES(tenant,id,linked) ON CONFLICT (incident_id,event_id) DO NOTHING;
+   GET DIAGNOSTICS link_created=ROW_COUNT;
+   IF link_created=1 THEN
+    result_audits:=result_audits || jsonb_build_array(vader_private.append_machine_audit_v1('incident_link_created','incident_events',id::text||':'||linked::text,batch));
+   END IF;
+   IF NOT EXISTS(SELECT 1 FROM public.incident_events WHERE organization_id=tenant AND incident_id=id AND event_id=linked) THEN
+    RAISE EXCEPTION 'Incident link integrity failure';
+   END IF;
+  END LOOP;
+ END LOOP;
+
+ FOR item IN SELECT value FROM jsonb_array_elements(bundle->'risks') LOOP
+  IF jsonb_typeof(item) IS DISTINCT FROM 'object' THEN RAISE EXCEPTION 'Invalid risk object'; END IF;
+  IF EXISTS(SELECT 1 FROM jsonb_object_keys(item) z(key) WHERE key NOT IN ('subject_type','subject_id','score','confidence','factors','explanation','model_version')) THEN
+   RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Unknown risk field';
+  END IF;
+  SELECT * INTO r FROM jsonb_populate_record(NULL::public.security_risk_scores,item);
+  IF r.subject_type IS NULL OR r.subject_type NOT IN ('finding','incident') OR r.subject_id IS NULL OR r.score IS NULL OR coalesce(btrim(r.model_version),'')='' OR jsonb_typeof(r.factors) IS DISTINCT FROM 'object' OR coalesce(btrim(r.factors->>'input_revision'),'')='' THEN
+   RAISE EXCEPTION USING ERRCODE='22023', MESSAGE='Invalid risk fields';
+  END IF;
+  IF (r.subject_type='finding' AND NOT EXISTS(SELECT 1 FROM public.security_findings WHERE organization_id=tenant AND security_findings.id=r.subject_id))
+     OR (r.subject_type='incident' AND NOT EXISTS(SELECT 1 FROM public.security_incidents WHERE organization_id=tenant AND security_incidents.id=r.subject_id)) THEN
+   RAISE EXCEPTION USING ERRCODE='23503',MESSAGE='Risk subject outside authorized tenant';
+  END IF;
+  id:=vader_private.id_v1('risk',tenant,jsonb_build_array(r.subject_type,r.subject_id,r.factors->>'input_revision',r.model_version));
+  payload:=jsonb_build_object('subject_type',r.subject_type,'subject_id',r.subject_id,'score',r.score,'confidence',r.confidence,'factors',r.factors,'explanation',r.explanation,'model_version',r.model_version);
+  fresh:=vader_private.claim_v1('risk',id,payload);
+  IF fresh THEN
+   INSERT INTO public.security_risk_scores(id,organization_id,subject_type,subject_id,score,confidence,factors,explanation,model_version)
+   VALUES(id,tenant,r.subject_type,r.subject_id,r.score,r.confidence,r.factors,r.explanation,r.model_version);
+   result_audits:=result_audits || jsonb_build_array(vader_private.append_machine_audit_v1('risk_created','security_risk_scores',id::text,batch));
+  ELSIF NOT EXISTS(SELECT 1 FROM public.security_risk_scores WHERE organization_id=tenant AND security_risk_scores.id=commit_bundle_v1.id) THEN
+   RAISE EXCEPTION 'Receipt row missing; administrative reconciliation required';
+  END IF;
+  result_risks:=result_risks || jsonb_build_array(id);
+ END LOOP;
+
+ response:=jsonb_build_object('request_id',batch,'event_ids',result_events,'finding_ids',result_findings,
+                             'incident_ids',result_incidents,'risk_ids',result_risks,'audit_ids',result_audits);
+ UPDATE vader_private.receipts SET response=commit_bundle_v1.response
+ WHERE organization_id=tenant AND kind='bundle' AND object_id=batch;
+ RETURN response;
+EXCEPTION WHEN OTHERS THEN
+ -- Do not relay raw FK/key values, evidence or upstream payloads to callers.
+ RAISE EXCEPTION USING ERRCODE=SQLSTATE,MESSAGE='VADER bundle rejected; operation changes rolled back';
+END
+$fn$;
+ALTER FUNCTION vader_api.commit_bundle_v1(jsonb) OWNER TO vader_writer_owner;
+REVOKE ALL ON FUNCTION vader_api.commit_bundle_v1(jsonb) FROM PUBLIC,anon,authenticated,service_role;
+GRANT EXECUTE ON FUNCTION vader_api.commit_bundle_v1(jsonb) TO vader_ingest;
+
+-- No login is provisioned/enabled and no API user receives rights here.
+-- Admin must separately approve each direct-login role, review all inherited
+-- privileges/SET ROLE paths, grant vader_ingest (never vader_writer_owner), and
+-- insert its OID/name/tenant binding via secure provisioning. No secret literals.
+REVOKE CREATE ON SCHEMA vader_private,vader_api FROM vader_writer_owner;
+COMMIT;

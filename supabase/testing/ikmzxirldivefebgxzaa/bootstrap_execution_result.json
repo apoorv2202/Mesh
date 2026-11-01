@@ -1,0 +1,12 @@
+﻿{
+    "recorded_at_utc":  "2026-10-29T17:37:20.7011740Z",
+    "migration_01_executed":  false,
+    "migration_02_executed":  false,
+    "phase":  "read_only_verification",
+    "bootstrap_sha256":  "02b3dc6c26021227cef1a67b2591e0277b1d2c8b0ba059cdcb92d62599eb5fc4",
+    "target":  "ikmzxirldivefebgxzaa",
+    "bootstrap_commit_acknowledged":  true,
+    "structural_verification_passed":  true,
+    "outcome":  "bootstrap_and_structural_verification_succeeded",
+    "production_accessed":  false
+}

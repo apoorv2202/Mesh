@@ -1,0 +1,25 @@
+{
+  "modified": [
+    "supabase/proposals/stage4b_write_phase2/04_human_triage.body.psql",
+    "supabase/proposals/stage4b_write_phase2/04_human_triage.sql",
+    "supabase/proposals/stage4b_write_phase2/acl_contract.json",
+    "supabase/proposals/stage4b_write_phase2/build_acl_contract.py",
+    "supabase/proposals/stage4b_write_phase2/build_candidates.py",
+    "supabase/proposals/stage4b_write_phase2/changed_preparation_files.json",
+    "supabase/testing/ikmzxirldivefebgxzaa/stage4b_write_phase2/assert_acl_exact.sql",
+    "supabase/testing/ikmzxirldivefebgxzaa/stage4b_write_phase2/assert_delta.sql",
+    "supabase/testing/ikmzxirldivefebgxzaa/stage4b_write_phase2/pins.json",
+    "supabase/testing/ikmzxirldivefebgxzaa/stage4b_write_phase2/update_preparation_pins.py",
+    "supabase/testing/ikmzxirldivefebgxzaa/stage4b_write_phase2/validate_offline.py"
+  ],
+  "created": [
+    "supabase/proposals/stage4b_write_phase2/MEMBERSHIP_HELPER_FIX_REVIEW.md",
+    "supabase/proposals/stage4b_write_phase2/membership_fix_inventory.json",
+    "supabase/proposals/stage4b_write_phase2/review_archive/membership_fix_before.json",
+    "supabase/proposals/stage4b_write_phase2/review_archive/pins.before_membership_helper_fix.json",
+    "supabase/testing/ikmzxirldivefebgxzaa/stage4b_write_phase2/membership_helper_tests.py"
+  ],
+  "historical_evidence_changed": false,
+  "before_inventory": "review_archive/membership_fix_before.json",
+  "prior_manifest_sha256": "9ce235e2887aea69bc0772c09ff8e646412cb845ce97cfd8df96e6d52976df68"
+}

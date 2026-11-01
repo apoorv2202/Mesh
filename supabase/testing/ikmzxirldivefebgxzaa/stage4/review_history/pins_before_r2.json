@@ -1,0 +1,27 @@
+{
+  "test_ref": "ikmzxirldivefebgxzaa",
+  "files": {
+    "acl_tests.sql": "86f23a4b8d016eb6a349041fc36d72338bd36a2c64866fd6eee7968a272972b7",
+    "assert_clean.sql": "8b3835a373ede457531abc028fd109ab670fc761b8ccc3c7fe7d5cf42b0faf0e",
+    "assert_schema.sql": "5cd5d4929c7efbade0fe4772c83988c3abea52ed35e469bebec4b3b75e396282",
+    "build_stage4.py": "373f1d5deea7e969e18ee1f224b8eaff5a09fd1344fd04ee8032d43d2f7e20c9",
+    "cleanup_check.sql": "f0799372190ddd77e9231518b7258f5183ac27c41421fe13c0a5e34fb2dcaa3e",
+    "documented_gaps.sql": "2a554abded29e88746f56f84712b2f59b64275d4a2662239cdb7f48c29bab0d2",
+    "fixture.sql": "7eccf5723591c55cb34d50c3d1755e5f98150c6c79f74f7444dd61cd84460b2d",
+    "fk_tests.sql": "af4fbc4b164f71d25676576c316aedb2cc41a87e4bca48f9c5b7b17fa2e73153",
+    "guard.sql": "86581a813298dcf5e73ed1c61883ceca3f35260734b3d6cfe08ec6a5236378ab",
+    "helper_tests.sql": "6705ee9e8a80d20628e93e938017724125784c88c30a2591e05f4b4b0674648d",
+    "Invoke-Stage4.ps1": "18125ed6198ff8b5fbc8ec6a3e40bbc31f94b54549220a59744c1e100bd2de84",
+    "jwt_boundary.py": "d5fcdbbe3c0adf62104c5b78ce933b3581867d104b3be15f938bbb1a97129fa6",
+    "owner_controls.sql": "5554a63696997c521d8767db622759431923a1fd1ea1e515050fd2ae7126cfa3",
+    "runtime.sql": "f0ebd3af13a691d653b386172c69820614cdea81edbc296167b15f17459eeee8",
+    "validate_stage4.py": "f70a8323d143ccc194505d8232310dcb8ca11f56f5bb6d156efbba77ceaa605e",
+    "verified_schema.json": "b2cbf17b97e01a3f3408cd9d51d75c15e89966172b3f2fd2c4d6be85c07aefb5",
+    "../target_guard.psql": "d43d44ba5bcd394616c860e14e6aab671a5f8df354ccf7993380fc512ede5189",
+    "../stage3/snapshot.sql": "0bf49de856444814a36eb07c5cc2b5fd655f76fb9beaebd7665ff94f5e6d1bc0",
+    "../stage3/evidence/verify_no_dml.txt": "5416ead6a2814e13dc1ada3de81c9d0fb22eab49be6908bce06d214ae6bcca21",
+    "../stage3/evidence/verify_no_dml.receipt.json": "2e68b72551ffdeda99d0fdfabea68291e9c92ce553fc5620e68a1b5c2848e77d",
+    "../post_bootstrap_verification.json": "2dd32314dd8189adc820f342f32af8f6968ccc37136181d68fdc2c866ed6802e",
+    "../../../inspection/vader_verification.json": "70171889939c159a71704d0df4731738361d2a4c53a7d36e5880210b2554bc44"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "01_audit_permissions.sql": "0eb67a8716bc73f1ce911212bc1957a3c44363e77a54c222a8c8a236f1922ffc",
+  "02_reference_integrity.sql": "ed72cd19bb07af353cd7eeacbb8a9bef21719c415079d1a6b401d0c90753ce94",
+  "03_machine_writer_r2.sql": "97844df3d7d06245ac5f5d650b9b05be45b4bebed2e3c8a7920f6abf7b3d996f",
+  "04_human_triage.sql": "8d47915d9f78d5fd0455843013488ffa9c9880ad79d27208074e900fe01a45e3"
+}

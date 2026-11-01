@@ -13,3 +13,11 @@ coverage/
 .azure/
 __pycache__/
 *.pyc
+
+.venv/
+supabase/.temp/
+supabase/testing/**/evidence/
+supabase/testing/**/evidence_r2/
+*.key
+*.p12
+*.pfx

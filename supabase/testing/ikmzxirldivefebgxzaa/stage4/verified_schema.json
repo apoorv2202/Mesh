@@ -1,0 +1,3317 @@
+{
+  "02_columns": [
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "incident_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "organization_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 1,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "incident_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "incident_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 2,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "incident_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "event_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 3,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "incident_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "relationship",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 4,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'related'::text"
+    },
+    {
+      "nullable": false,
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "incident_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "created_at",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "timestamp with time zone",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 5,
+      "numeric_precision": null,
+      "datetime_precision": 6,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "now()"
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 1,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "gen_random_uuid()"
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "organization_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 2,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "asset_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 3,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "source",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 4,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "external_event_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 5,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "event_type",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 6,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "actor_user_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 7,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "actor_identifier",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 8,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "action",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 9,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "outcome",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 10,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "inet",
+      "data_type": "inet",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "source_ip",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "inet",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 11,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "severity",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 12,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'info'::text"
+    },
+    {
+      "nullable": false,
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "event_time",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "timestamp with time zone",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 13,
+      "numeric_precision": null,
+      "datetime_precision": 6,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "received_at",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "timestamp with time zone",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 14,
+      "numeric_precision": null,
+      "datetime_precision": 6,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "now()"
+    },
+    {
+      "nullable": false,
+      "udt_name": "jsonb",
+      "data_type": "jsonb",
+      "table_name": "security_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "details",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "jsonb",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 15,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'{}'::jsonb"
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 1,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "gen_random_uuid()"
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "organization_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 2,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "asset_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 3,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "source_event_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 4,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "title",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 5,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "description",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 6,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "finding_type",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 7,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "severity",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 8,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'medium'::text"
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "status",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 9,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'open'::text"
+    },
+    {
+      "nullable": false,
+      "udt_name": "jsonb",
+      "data_type": "jsonb",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "evidence",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "jsonb",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 10,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'{}'::jsonb"
+    },
+    {
+      "nullable": true,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "remediation",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 11,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "detected_at",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "timestamp with time zone",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 12,
+      "numeric_precision": null,
+      "datetime_precision": 6,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "now()"
+    },
+    {
+      "nullable": true,
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "security_findings",
+      "udt_schema": "pg_catalog",
+      "column_name": "resolved_at",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "timestamp with time zone",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 13,
+      "numeric_precision": null,
+      "datetime_precision": 6,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 1,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "gen_random_uuid()"
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "organization_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 2,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "int8",
+      "data_type": "bigint",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "incident_number",
+      "domain_name": null,
+      "is_identity": "YES",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "a",
+      "numeric_scale": 0,
+      "postgres_type": "bigint",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 3,
+      "numeric_precision": 64,
+      "datetime_precision": null,
+      "identity_generation": "ALWAYS",
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "title",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 4,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "description",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 5,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "severity",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 6,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'medium'::text"
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "status",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 7,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'detected'::text"
+    },
+    {
+      "nullable": true,
+      "udt_name": "numeric",
+      "data_type": "numeric",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "risk_score",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": 2,
+      "postgres_type": "numeric(5,2)",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 8,
+      "numeric_precision": 5,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "numeric",
+      "data_type": "numeric",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "confidence",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": 3,
+      "postgres_type": "numeric(4,3)",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 9,
+      "numeric_precision": 4,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "assigned_to",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 10,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "jsonb",
+      "data_type": "jsonb",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "summary",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "jsonb",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 11,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'{}'::jsonb"
+    },
+    {
+      "nullable": false,
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "detected_at",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "timestamp with time zone",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 12,
+      "numeric_precision": null,
+      "datetime_precision": 6,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "now()"
+    },
+    {
+      "nullable": true,
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "resolved_at",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "timestamp with time zone",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 13,
+      "numeric_precision": null,
+      "datetime_precision": 6,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "security_incidents",
+      "udt_schema": "pg_catalog",
+      "column_name": "created_at",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "timestamp with time zone",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 14,
+      "numeric_precision": null,
+      "datetime_precision": 6,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "now()"
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 1,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "gen_random_uuid()"
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "organization_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 2,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "subject_type",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 3,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "subject_id",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "uuid",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 4,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "numeric",
+      "data_type": "numeric",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "score",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": 2,
+      "postgres_type": "numeric(5,2)",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 5,
+      "numeric_precision": 5,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": true,
+      "udt_name": "numeric",
+      "data_type": "numeric",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "confidence",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": 3,
+      "postgres_type": "numeric(4,3)",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 6,
+      "numeric_precision": 4,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "jsonb",
+      "data_type": "jsonb",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "factors",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "jsonb",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 7,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "'{}'::jsonb"
+    },
+    {
+      "nullable": true,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "explanation",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 8,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "model_version",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "text",
+      "collation_name": "default",
+      "generated_kind": "",
+      "collation_schema": "pg_catalog",
+      "ordinal_position": 9,
+      "numeric_precision": null,
+      "datetime_precision": null,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": null
+    },
+    {
+      "nullable": false,
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "security_risk_scores",
+      "udt_schema": "pg_catalog",
+      "column_name": "calculated_at",
+      "domain_name": null,
+      "is_identity": "NO",
+      "schema_name": "public",
+      "domain_schema": null,
+      "identity_kind": "",
+      "numeric_scale": null,
+      "postgres_type": "timestamp with time zone",
+      "collation_name": null,
+      "generated_kind": "",
+      "collation_schema": null,
+      "ordinal_position": 10,
+      "numeric_precision": null,
+      "datetime_precision": 6,
+      "identity_generation": null,
+      "character_maximum_length": null,
+      "default_or_generation_expression": "now()"
+    }
+  ],
+  "03_constraints": [
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id, event_id) REFERENCES security_events(organization_id, id)",
+      "table_name": "incident_events",
+      "schema_name": "public",
+      "constraint_name": "incident_events_organization_id_event_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "security_events",
+      "referenced_schema": "public",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id) REFERENCES organizations(id)",
+      "table_name": "incident_events",
+      "schema_name": "public",
+      "constraint_name": "incident_events_organization_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "organizations",
+      "referenced_schema": "public",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id, incident_id) REFERENCES security_incidents(organization_id, id) ON DELETE CASCADE",
+      "table_name": "incident_events",
+      "schema_name": "public",
+      "constraint_name": "incident_events_organization_id_incident_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "security_incidents",
+      "referenced_schema": "public",
+      "delete_action_code": "c",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "PRIMARY KEY (incident_id, event_id)",
+      "table_name": "incident_events",
+      "schema_name": "public",
+      "constraint_name": "incident_events_pkey",
+      "constraint_type": "p",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (actor_user_id) REFERENCES auth.users(id)",
+      "table_name": "security_events",
+      "schema_name": "public",
+      "constraint_name": "security_events_actor_user_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "users",
+      "referenced_schema": "auth",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id, asset_id) REFERENCES security_assets(organization_id, id)",
+      "table_name": "security_events",
+      "schema_name": "public",
+      "constraint_name": "security_events_organization_id_asset_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "security_assets",
+      "referenced_schema": "public",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id) REFERENCES organizations(id)",
+      "table_name": "security_events",
+      "schema_name": "public",
+      "constraint_name": "security_events_organization_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "organizations",
+      "referenced_schema": "public",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "UNIQUE (organization_id, id)",
+      "table_name": "security_events",
+      "schema_name": "public",
+      "constraint_name": "security_events_organization_id_id_key",
+      "constraint_type": "u",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "security_events",
+      "schema_name": "public",
+      "constraint_name": "security_events_pkey",
+      "constraint_type": "p",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK ((severity = ANY (ARRAY['info'::text, 'low'::text, 'medium'::text, 'high'::text, 'critical'::text])))",
+      "table_name": "security_events",
+      "schema_name": "public",
+      "constraint_name": "security_events_severity_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id, asset_id) REFERENCES security_assets(organization_id, id)",
+      "table_name": "security_findings",
+      "schema_name": "public",
+      "constraint_name": "security_findings_organization_id_asset_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "security_assets",
+      "referenced_schema": "public",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id) REFERENCES organizations(id)",
+      "table_name": "security_findings",
+      "schema_name": "public",
+      "constraint_name": "security_findings_organization_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "organizations",
+      "referenced_schema": "public",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "UNIQUE (organization_id, id)",
+      "table_name": "security_findings",
+      "schema_name": "public",
+      "constraint_name": "security_findings_organization_id_id_key",
+      "constraint_type": "u",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id, source_event_id) REFERENCES security_events(organization_id, id)",
+      "table_name": "security_findings",
+      "schema_name": "public",
+      "constraint_name": "security_findings_organization_id_source_event_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "security_events",
+      "referenced_schema": "public",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "security_findings",
+      "schema_name": "public",
+      "constraint_name": "security_findings_pkey",
+      "constraint_type": "p",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK ((severity = ANY (ARRAY['info'::text, 'low'::text, 'medium'::text, 'high'::text, 'critical'::text])))",
+      "table_name": "security_findings",
+      "schema_name": "public",
+      "constraint_name": "security_findings_severity_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK ((status = ANY (ARRAY['open'::text, 'investigating'::text, 'remediating'::text, 'resolved'::text, 'false_positive'::text, 'accepted_risk'::text])))",
+      "table_name": "security_findings",
+      "schema_name": "public",
+      "constraint_name": "security_findings_status_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (assigned_to) REFERENCES auth.users(id)",
+      "table_name": "security_incidents",
+      "schema_name": "public",
+      "constraint_name": "security_incidents_assigned_to_fkey",
+      "constraint_type": "f",
+      "referenced_table": "users",
+      "referenced_schema": "auth",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK (((confidence >= (0)::numeric) AND (confidence <= (1)::numeric)))",
+      "table_name": "security_incidents",
+      "schema_name": "public",
+      "constraint_name": "security_incidents_confidence_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "UNIQUE (incident_number)",
+      "table_name": "security_incidents",
+      "schema_name": "public",
+      "constraint_name": "security_incidents_incident_number_key",
+      "constraint_type": "u",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id) REFERENCES organizations(id)",
+      "table_name": "security_incidents",
+      "schema_name": "public",
+      "constraint_name": "security_incidents_organization_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "organizations",
+      "referenced_schema": "public",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "UNIQUE (organization_id, id)",
+      "table_name": "security_incidents",
+      "schema_name": "public",
+      "constraint_name": "security_incidents_organization_id_id_key",
+      "constraint_type": "u",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "security_incidents",
+      "schema_name": "public",
+      "constraint_name": "security_incidents_pkey",
+      "constraint_type": "p",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK (((risk_score >= (0)::numeric) AND (risk_score <= (100)::numeric)))",
+      "table_name": "security_incidents",
+      "schema_name": "public",
+      "constraint_name": "security_incidents_risk_score_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK ((severity = ANY (ARRAY['low'::text, 'medium'::text, 'high'::text, 'critical'::text])))",
+      "table_name": "security_incidents",
+      "schema_name": "public",
+      "constraint_name": "security_incidents_severity_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK ((status = ANY (ARRAY['detected'::text, 'triaged'::text, 'investigating'::text, 'contained'::text, 'remediating'::text, 'recovering'::text, 'resolved'::text, 'false_positive'::text])))",
+      "table_name": "security_incidents",
+      "schema_name": "public",
+      "constraint_name": "security_incidents_status_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK (((confidence >= (0)::numeric) AND (confidence <= (1)::numeric)))",
+      "table_name": "security_risk_scores",
+      "schema_name": "public",
+      "constraint_name": "security_risk_scores_confidence_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "FOREIGN KEY (organization_id) REFERENCES organizations(id)",
+      "table_name": "security_risk_scores",
+      "schema_name": "public",
+      "constraint_name": "security_risk_scores_organization_id_fkey",
+      "constraint_type": "f",
+      "referenced_table": "organizations",
+      "referenced_schema": "public",
+      "delete_action_code": "a",
+      "initially_deferred": false,
+      "update_action_code": "a"
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "security_risk_scores",
+      "schema_name": "public",
+      "constraint_name": "security_risk_scores_pkey",
+      "constraint_type": "p",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK (((score >= (0)::numeric) AND (score <= (100)::numeric)))",
+      "table_name": "security_risk_scores",
+      "schema_name": "public",
+      "constraint_name": "security_risk_scores_score_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    },
+    {
+      "validated": true,
+      "deferrable": false,
+      "definition": "CHECK ((subject_type = ANY (ARRAY['identity'::text, 'asset'::text, 'finding'::text, 'incident'::text])))",
+      "table_name": "security_risk_scores",
+      "schema_name": "public",
+      "constraint_name": "security_risk_scores_subject_type_check",
+      "constraint_type": "c",
+      "referenced_table": null,
+      "referenced_schema": null,
+      "delete_action_code": " ",
+      "initially_deferred": false,
+      "update_action_code": " "
+    }
+  ],
+  "04_indexes": [
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": null,
+      "definition": "CREATE UNIQUE INDEX incident_events_pkey ON public.incident_events USING btree (incident_id, event_id)",
+      "index_name": "incident_events_pkey",
+      "is_primary": true,
+      "table_name": "incident_events"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": false,
+      "predicate": null,
+      "definition": "CREATE INDEX security_events_actor_time_idx ON public.security_events USING btree (organization_id, actor_user_id, event_time DESC)",
+      "index_name": "security_events_actor_time_idx",
+      "is_primary": false,
+      "table_name": "security_events"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": "(external_event_id IS NOT NULL)",
+      "definition": "CREATE UNIQUE INDEX security_events_external_dedupe_idx ON public.security_events USING btree (organization_id, source, external_event_id) WHERE (external_event_id IS NOT NULL)",
+      "index_name": "security_events_external_dedupe_idx",
+      "is_primary": false,
+      "table_name": "security_events"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": false,
+      "predicate": null,
+      "definition": "CREATE INDEX security_events_org_time_idx ON public.security_events USING btree (organization_id, event_time DESC)",
+      "index_name": "security_events_org_time_idx",
+      "is_primary": false,
+      "table_name": "security_events"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": null,
+      "definition": "CREATE UNIQUE INDEX security_events_organization_id_id_key ON public.security_events USING btree (organization_id, id)",
+      "index_name": "security_events_organization_id_id_key",
+      "is_primary": false,
+      "table_name": "security_events"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": null,
+      "definition": "CREATE UNIQUE INDEX security_events_pkey ON public.security_events USING btree (id)",
+      "index_name": "security_events_pkey",
+      "is_primary": true,
+      "table_name": "security_events"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": false,
+      "predicate": null,
+      "definition": "CREATE INDEX security_findings_org_status_idx ON public.security_findings USING btree (organization_id, status, severity)",
+      "index_name": "security_findings_org_status_idx",
+      "is_primary": false,
+      "table_name": "security_findings"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": null,
+      "definition": "CREATE UNIQUE INDEX security_findings_organization_id_id_key ON public.security_findings USING btree (organization_id, id)",
+      "index_name": "security_findings_organization_id_id_key",
+      "is_primary": false,
+      "table_name": "security_findings"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": null,
+      "definition": "CREATE UNIQUE INDEX security_findings_pkey ON public.security_findings USING btree (id)",
+      "index_name": "security_findings_pkey",
+      "is_primary": true,
+      "table_name": "security_findings"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": null,
+      "definition": "CREATE UNIQUE INDEX security_incidents_incident_number_key ON public.security_incidents USING btree (incident_number)",
+      "index_name": "security_incidents_incident_number_key",
+      "is_primary": false,
+      "table_name": "security_incidents"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": false,
+      "predicate": null,
+      "definition": "CREATE INDEX security_incidents_org_status_idx ON public.security_incidents USING btree (organization_id, status, detected_at DESC)",
+      "index_name": "security_incidents_org_status_idx",
+      "is_primary": false,
+      "table_name": "security_incidents"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": null,
+      "definition": "CREATE UNIQUE INDEX security_incidents_organization_id_id_key ON public.security_incidents USING btree (organization_id, id)",
+      "index_name": "security_incidents_organization_id_id_key",
+      "is_primary": false,
+      "table_name": "security_incidents"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": null,
+      "definition": "CREATE UNIQUE INDEX security_incidents_pkey ON public.security_incidents USING btree (id)",
+      "index_name": "security_incidents_pkey",
+      "is_primary": true,
+      "table_name": "security_incidents"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": true,
+      "predicate": null,
+      "definition": "CREATE UNIQUE INDEX security_risk_scores_pkey ON public.security_risk_scores USING btree (id)",
+      "index_name": "security_risk_scores_pkey",
+      "is_primary": true,
+      "table_name": "security_risk_scores"
+    },
+    {
+      "is_ready": true,
+      "is_valid": true,
+      "is_unique": false,
+      "predicate": null,
+      "definition": "CREATE INDEX security_risk_scores_subject_idx ON public.security_risk_scores USING btree (organization_id, subject_type, subject_id, calculated_at DESC)",
+      "index_name": "security_risk_scores_subject_idx",
+      "is_primary": false,
+      "table_name": "security_risk_scores"
+    }
+  ],
+  "09_rls_status": [
+    {
+      "owner": "postgres",
+      "rls_forced": false,
+      "table_name": "incident_events",
+      "rls_enabled": true,
+      "policy_count": 1
+    },
+    {
+      "owner": "postgres",
+      "rls_forced": false,
+      "table_name": "security_events",
+      "rls_enabled": true,
+      "policy_count": 1
+    },
+    {
+      "owner": "postgres",
+      "rls_forced": false,
+      "table_name": "security_findings",
+      "rls_enabled": true,
+      "policy_count": 1
+    },
+    {
+      "owner": "postgres",
+      "rls_forced": false,
+      "table_name": "security_incidents",
+      "rls_enabled": true,
+      "policy_count": 1
+    },
+    {
+      "owner": "postgres",
+      "rls_forced": false,
+      "table_name": "security_risk_scores",
+      "rls_enabled": true,
+      "policy_count": 1
+    }
+  ],
+  "10_policies": [
+    {
+      "roles": [
+        "authenticated"
+      ],
+      "command": "SELECT",
+      "permissive": true,
+      "table_name": "incident_events",
+      "policy_name": "Security reads incident evidence",
+      "using_expression": "is_mesh_member(organization_id, ARRAY['security_team'::mesh_role])",
+      "with_check_expression": null
+    },
+    {
+      "roles": [
+        "authenticated"
+      ],
+      "command": "SELECT",
+      "permissive": true,
+      "table_name": "security_events",
+      "policy_name": "Security reads events",
+      "using_expression": "is_mesh_member(organization_id, ARRAY['security_team'::mesh_role])",
+      "with_check_expression": null
+    },
+    {
+      "roles": [
+        "authenticated"
+      ],
+      "command": "SELECT",
+      "permissive": true,
+      "table_name": "security_findings",
+      "policy_name": "Security reads findings",
+      "using_expression": "is_mesh_member(organization_id, ARRAY['security_team'::mesh_role])",
+      "with_check_expression": null
+    },
+    {
+      "roles": [
+        "authenticated"
+      ],
+      "command": "SELECT",
+      "permissive": true,
+      "table_name": "security_incidents",
+      "policy_name": "Security reads incidents",
+      "using_expression": "is_mesh_member(organization_id, ARRAY['security_team'::mesh_role])",
+      "with_check_expression": null
+    },
+    {
+      "roles": [
+        "authenticated"
+      ],
+      "command": "SELECT",
+      "permissive": true,
+      "table_name": "security_risk_scores",
+      "policy_name": "Security reads risk scores",
+      "using_expression": "is_mesh_member(organization_id, ARRAY['security_team'::mesh_role])",
+      "with_check_expression": null
+    }
+  ],
+  "post_migration_effective": [
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "anon",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "anon",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "anon",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "anon",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "anon",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "anon",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "anon",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "anon",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "anon",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "anon",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "anon",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "anon",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "anon",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "anon",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "anon",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "anon",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "anon",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "anon",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "anon",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "anon",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "anon",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "anon",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "anon",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "anon",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "anon",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "anon",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "anon",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "anon",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "anon",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "anon",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "anon",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "anon",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "anon",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "anon",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "anon",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "anon",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "anon",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "anon",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "anon",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "anon",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticated",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticated",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticated",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticated",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticated",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticated",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticated",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticated",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticated",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticated",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticated",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticated",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticated",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticated",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticated",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticated",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticated",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticated",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticated",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticated",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticated",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticated",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticated",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticated",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticated",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticated",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticated",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticated",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticated",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticated",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticated",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticated",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticated",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticated",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticated",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticated",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticated",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticated",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticated",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticated",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticator",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticator",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticator",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticator",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticator",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticator",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticator",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "authenticator",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticator",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticator",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticator",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticator",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticator",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticator",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticator",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "authenticator",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticator",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticator",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticator",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticator",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticator",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticator",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticator",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "authenticator",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticator",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticator",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticator",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticator",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticator",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticator",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticator",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "authenticator",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticator",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticator",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticator",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticator",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticator",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticator",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticator",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "authenticator",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": true,
+      "relname": "incident_events",
+      "rolname": "postgres",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": true,
+      "relname": "incident_events",
+      "rolname": "postgres",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": true,
+      "relname": "incident_events",
+      "rolname": "postgres",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": true,
+      "relname": "incident_events",
+      "rolname": "postgres",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": true,
+      "relname": "incident_events",
+      "rolname": "postgres",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": true,
+      "relname": "incident_events",
+      "rolname": "postgres",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": true,
+      "relname": "incident_events",
+      "rolname": "postgres",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": true,
+      "relname": "incident_events",
+      "rolname": "postgres",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_events",
+      "rolname": "postgres",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_events",
+      "rolname": "postgres",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": true,
+      "relname": "security_events",
+      "rolname": "postgres",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": true,
+      "relname": "security_events",
+      "rolname": "postgres",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": true,
+      "relname": "security_events",
+      "rolname": "postgres",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": true,
+      "relname": "security_events",
+      "rolname": "postgres",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": true,
+      "relname": "security_events",
+      "rolname": "postgres",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_events",
+      "rolname": "postgres",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_findings",
+      "rolname": "postgres",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_findings",
+      "rolname": "postgres",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": true,
+      "relname": "security_findings",
+      "rolname": "postgres",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": true,
+      "relname": "security_findings",
+      "rolname": "postgres",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": true,
+      "relname": "security_findings",
+      "rolname": "postgres",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": true,
+      "relname": "security_findings",
+      "rolname": "postgres",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": true,
+      "relname": "security_findings",
+      "rolname": "postgres",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_findings",
+      "rolname": "postgres",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_incidents",
+      "rolname": "postgres",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_incidents",
+      "rolname": "postgres",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": true,
+      "relname": "security_incidents",
+      "rolname": "postgres",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": true,
+      "relname": "security_incidents",
+      "rolname": "postgres",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": true,
+      "relname": "security_incidents",
+      "rolname": "postgres",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": true,
+      "relname": "security_incidents",
+      "rolname": "postgres",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": true,
+      "relname": "security_incidents",
+      "rolname": "postgres",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_incidents",
+      "rolname": "postgres",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_risk_scores",
+      "rolname": "postgres",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_risk_scores",
+      "rolname": "postgres",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": true,
+      "relname": "security_risk_scores",
+      "rolname": "postgres",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": true,
+      "relname": "security_risk_scores",
+      "rolname": "postgres",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": true,
+      "relname": "security_risk_scores",
+      "rolname": "postgres",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": true,
+      "relname": "security_risk_scores",
+      "rolname": "postgres",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": true,
+      "relname": "security_risk_scores",
+      "rolname": "postgres",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": true,
+      "relname": "security_risk_scores",
+      "rolname": "postgres",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "service_role",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "service_role",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "service_role",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "service_role",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "service_role",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "service_role",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "service_role",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "incident_events",
+      "rolname": "service_role",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "service_role",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "service_role",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "service_role",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "service_role",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "service_role",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "service_role",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "service_role",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_events",
+      "rolname": "service_role",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "service_role",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "service_role",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "service_role",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "service_role",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "service_role",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "service_role",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "service_role",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_findings",
+      "rolname": "service_role",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "service_role",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "service_role",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "service_role",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "service_role",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "service_role",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "service_role",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "service_role",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_incidents",
+      "rolname": "service_role",
+      "privilege": "UPDATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "service_role",
+      "privilege": "DELETE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "service_role",
+      "privilege": "INSERT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "service_role",
+      "privilege": "MAINTAIN"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "service_role",
+      "privilege": "REFERENCES"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "service_role",
+      "privilege": "SELECT"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "service_role",
+      "privilege": "TRIGGER"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "service_role",
+      "privilege": "TRUNCATE"
+    },
+    {
+      "allowed": false,
+      "relname": "security_risk_scores",
+      "rolname": "service_role",
+      "privilege": "UPDATE"
+    }
+  ],
+  "post_migration_target_acls": [
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres"
+      ],
+      "owner": "16388",
+      "table": "incident_events"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres"
+      ],
+      "owner": "16388",
+      "table": "security_events"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres"
+      ],
+      "owner": "16388",
+      "table": "security_findings"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres"
+      ],
+      "owner": "16388",
+      "table": "security_incidents"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres"
+      ],
+      "owner": "16388",
+      "table": "security_risk_scores"
+    }
+  ],
+  "helper_security": [
+    {
+      "owner": "postgres",
+      "prokind": "f",
+      "identity": "is_mesh_member(uuid,mesh_role[])",
+      "language": "sql",
+      "pronargs": 2,
+      "prosecdef": true,
+      "proisstrict": false,
+      "provolatile": "s",
+      "result_type": "boolean",
+      "schema_name": "public",
+      "proleakproof": false,
+      "routine_name": "is_mesh_member",
+      "pronargdefaults": 1,
+      "safety_settings": [
+        "search_path=\"\""
+      ],
+      "argument_defaults": "NULL::mesh_role[]",
+      "definition_status": "included_requires_private_secret_review",
+      "identity_arguments": "p_organization_id uuid, p_roles mesh_role[]",
+      "other_setting_names_values_withheld": []
+    }
+  ]
+}

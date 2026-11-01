@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-31",
+  "historical_files_changed": false,
+  "modified": [
+    {
+      "path": "../../../proposals/stage4b_write_phase2/03_machine_writer.body.psql",
+      "before_sha256": "312e312ba76a2519d4468948de8a1bc486405ff82a57ecb60fb0ae3f7dfb5b38",
+      "after_sha256": "007f5320242afb03fa453670245d8c61016412c132d7274ae23d9f1ed6060b4f"
+    },
+    {
+      "path": "../../../proposals/stage4b_write_phase2/03_machine_writer.sql",
+      "before_sha256": "bae05ec9d98a0276ce2584c8dde45db79d5237d7638c598bf802415158cc562b",
+      "after_sha256": "131675deef56605b8b051249a5bce4555d93e36c55d7a9c80463a5d8c3c94140"
+    },
+    {
+      "path": "../../../proposals/stage4b_write_phase2/04_human_triage.body.psql",
+      "before_sha256": "34308d8eef9900136d5957a305f6704257ef93e0a24a58cf2f6b4807c241a55d",
+      "after_sha256": "d04041172bcb0eb5f06f59a8be533eb04f9b01d563635465b3772b42ca70c662"
+    },
+    {
+      "path": "../../../proposals/stage4b_write_phase2/04_human_triage.sql",
+      "before_sha256": "83dd092bda34fba8f95c62b33650f865006176719190d9b3cb59ee0e83814ddc",
+      "after_sha256": "72ded1b14db734b6f595e1235f94fa3f950882ddd94555904b88002f22a8e45d"
+    },
+    {
+      "path": "../../../proposals/stage4b_write_phase2/CONTRACTS.md",
+      "before_sha256": "a322ff07fd6967279237db7b90219015f34edeeed749edd613e4caa4c62300b6",
+      "after_sha256": "cab704d5511a210dcd39fe3b8ac18d52980f6f49a7600a79b9940c02d166d9cb"
+    },
+    {
+      "path": "../../../proposals/stage4b_write_phase2/REVIEW_REPORT.md",
+      "before_sha256": "691d0d9d89460a8135989a1739b347f3c87be3062459b5e169992d62bc94f5ca",
+      "after_sha256": "85bc04ad1eff7520ab03ae5913f853ba4953c36210223161ebd1e6fa85d3a077"
+    },
+    {
+      "path": "../../../proposals/stage4b_write_phase2/build_candidates.py",
+      "before_sha256": "86655f642a62ae022cd39bdad8b963476071620b5d25a540703ef64b9ccf289d",
+      "after_sha256": "38842292713f0449acffe0d8b2fab25941df41d98d781811377f6c52a0bac58c"
+    },
+    {
+      "path": "../../../proposals/stage4b_write_phase2/build_object_contract.py",
+      "before_sha256": "06738bd6056d87ced359511b7a5885ec83493b9956916195b94dd167bef96308",
+      "after_sha256": "599946fe2cdf4e1b44d533df23ae0e953c60c3879f045b0401dde3643f99aad1"
+    },
+    {
+      "path": "../../../proposals/stage4b_write_phase2/object_contract.json",
+      "before_sha256": "430992c0b15bf26d7890faa7a57b10695d4eed924c89f8f8ef16d731b28c0882",
+      "after_sha256": "de4a5609ecffecc0503ec3b8e8ab5b113f4b818e22bc8d9ac185836bb37ea631"
+    },
+    {
+      "path": "Invoke-WriteRollback.ps1",
+      "before_sha256": "898bfe562a18d7140a8c024e37d570efb844cb3b746256350d368aaffd1e725e",
+      "after_sha256": "78059082b6f3ababb67dfc3563c797a6322f50d64a03ef9876d2f59e99d1f636"
+    },
+    {
+      "path": "README.md",
+      "before_sha256": "f01bd43ac13ab61afcd47c18893ab573fd8da0d44a3a6b62c514781c9b7b07ce",
+      "after_sha256": "9531a5e4cda9cf209ab6cbc69cf6f73f9a7d0bdefd3a0218a02f7a881dbebb08"
+    },
+    {
+      "path": "assert_delta.sql",
+      "before_sha256": "e307345c88324a0b4802cf35bf74c63620cf3efc062327904c80bc4ca1597674",
+      "after_sha256": "e8672c5f1da8aa371c69c28bd7b007e37ece577587a041c3fac2a4583ea2bffd"
+    },
+    {
+      "path": "assert_object_contract.sql",
+      "before_sha256": "cdafc9283f6c931c2c2e142324796f41fec0c18ce620a4cd19f6c0d1bbf339ee",
+      "after_sha256": "8dc97269a0143595acd898e460ed2acdd734e16f96df568a42714c87435fe767"
+    },
+    {
+      "path": "cleanup_check.sql",
+      "before_sha256": "ee5ab068425a358051e5f7aee8a34370982069fdf5202c5831019d841e5d0bdd",
+      "after_sha256": "eccc113fb7b6048ade928b62a483ac8287ddccf71119ec894666506048c1f45c"
+    },
+    {
+      "path": "execution_readiness.json",
+      "before_sha256": "dc88e5c8fbfc19486a50ea3dad460f34f015d7a065cc4bb751672136483b7aa9",
+      "after_sha256": "0bd68d8afb72333ade2d03b824aae2b2f2e1ffd991172ac20a27640dd64cb572"
+    },
+    {
+      "path": "runtime.sql",
+      "before_sha256": "3d43d05807b8763ab839e10f2e9070dee067dd0f0593c2909c3119f9b5663f50",
+      "after_sha256": "8ceaae651ec5821cad46b7069a8e1f8bfd28837b4b853800d7dffc8ad5dc93c4"
+    },
+    {
+      "path": "validate_offline.py",
+      "before_sha256": "3102defa24bd8143cec6c7983a9cb1b39d53486397d244019caeb88f28c33ee8",
+      "after_sha256": "479e32ba1475de39db4d90ebc3af4c760ddf09b985e4ddf630f4048d278723ab"
+    }
+  ],
+  "added": [
+    "../../../proposals/stage4b_write_phase2/acl_contract.json",
+    "../../../proposals/stage4b_write_phase2/BLOCKER_CORRECTIONS.md",
+    "../../../proposals/stage4b_write_phase2/build_acl_contract.py",
+    "../../../proposals/stage4b_write_phase2/changed_preparation_files.json",
+    "../../../proposals/stage4b_write_phase2/GATE_ELIGIBILITY_REVIEW.md",
+    "../../../proposals/stage4b_write_phase2/LIFECYCLE_APPROVAL.md",
+    "../../../proposals/stage4b_write_phase2/membership_fix_inventory.json",
+    "../../../proposals/stage4b_write_phase2/MEMBERSHIP_HELPER_FIX_REVIEW.md",
+    "../../../proposals/stage4b_write_phase2/OWNERSHIP_FIX_REVIEW.md",
+    "../../../proposals/stage4b_write_phase2/ownership_parser.py",
+    "../../../proposals/stage4b_write_phase2/review_archive/membership_fix_before.json",
+    "../../../proposals/stage4b_write_phase2/review_archive/pins.before_blocker_corrections.json",
+    "../../../proposals/stage4b_write_phase2/review_archive/pins.before_gate_eligibility_tooling.json",
+    "../../../proposals/stage4b_write_phase2/review_archive/pins.before_lifecycle_approval.json",
+    "../../../proposals/stage4b_write_phase2/review_archive/pins.before_membership_helper_fix.json",
+    "../../../proposals/stage4b_write_phase2/review_archive/pins.before_ownership_parser_fix.json",
+    "acl_model.py",
+    "acl_negative_tests.py",
+    "assert_acl_exact.sql",
+    "assert_memberships.sql",
+    "capture_acl.sql",
+    "gate_regression_tests.py",
+    "gate_state.py",
+    "membership_helper_tests.py",
+    "ownership_regression_tests.py",
+    "Test-ApprovalGuardOffline.ps1",
+    "update_preparation_pins.py",
+    "verify_ownership_contracts.py"
+  ]
+}

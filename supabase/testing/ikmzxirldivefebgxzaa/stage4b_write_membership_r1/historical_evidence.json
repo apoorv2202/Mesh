@@ -1,0 +1,12 @@
+{
+  "stage4b_write_phase2/evidence/cleanup_check.receipt.json": "da13a35090d634a258acea0dc25ab5bc7af200022051d0d7392dc46f9b930321",
+  "stage4b_write_phase2/evidence/cleanup_check.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stage4b_write_phase2/evidence/cleanup_check.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stage4b_write_phase2/evidence/runtime.receipt.json": "3b2eedc1cdfe3c417907909373c563c4c4ed0002b725c86747c46811ef1244a1",
+  "stage4b_write_phase2/evidence/runtime.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stage4b_write_phase2/evidence/runtime.txt": "a0bf348ce7a2a602e52da9b9385d02937b9b40d109e2e32bbbc461148234d53a",
+  "stage4b_write_cleanup_recovery/evidence/attempt_01/native_stdout.txt": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5",
+  "stage4b_write_cleanup_recovery/evidence/attempt_01/receipt.json": "9c76a6fdd90338161b1b10e6862c5268c3b1c20fcb1e3fa1d587043dc2b986d1",
+  "stage4b_write_cleanup_recovery/evidence/attempt_01/result.txt": "7fc51683a479cd5b4af2f0fc0a6e21c242ab2852c4d7f805d25dc7a037871596",
+  "stage4b_write_cleanup_recovery/evidence/attempt_01/stderr.txt": "f1945cd6c19e56b3c1c78943ef5ec18116907a4ca1efc40a57d48ab1db7adfc5"
+}

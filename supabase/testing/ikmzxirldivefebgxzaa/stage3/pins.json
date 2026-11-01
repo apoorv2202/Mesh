@@ -1,0 +1,23 @@
+{
+  "test_ref": "ikmzxirldivefebgxzaa",
+  "proposal_sha256": "1aefa726f675f3b5441495e033262442355337f528933512376b40fe9cdb55bd",
+  "files": {
+    "apply.sql": "7b942e61d759fa3b7696a1c8b13a3e86d290967fffa5c05ca728e3c185d6a64b",
+    "assert_baseline.sql": "c6b4f4fe0aa5ef99e439a290d7399919b38c510aab1e9f1ea8a90e2c5c50038b",
+    "assert_hardened.sql": "31aedc24474211cf44e140dc4957684a5948005041a8cf6f9c865c8a029b9132",
+    "baseline.sql": "0d2e47cc43c58f662824741536398e04dfc5be89ec315375b4909b8ee3ccc6ee",
+    "build_stage3.py": "9eb2b46e013fd8e05b617cc32092b0acac6d76bf5f84ad936fd2d6fa3623451e",
+    "dml.sql": "75a1b52c886f4c63ee6b505dad099d1ea3619f2b6379e27d34dead2abddf6dd5",
+    "dml_probes.sql": "8d76c2f1d2b2397bf4c7dd79e283dc38152e98b6606c4edbb42ccc514b5c5eac",
+    "gate.sql": "a556f3a2922622bf1253cc69c61b2a324f4bcc2394a4a691d3f5e08fd74b6b13",
+    "guard.sql": "7d0c2ecc1455575f1aa33211ada52c29b04c087f62b527380168ead45f0759be",
+    "Invoke-Migration01Test.ps1": "c29ed09a30edc5f348cd17fab880362cc7a26a7160f80f9826b4bc95fe4be44a",
+    "migration01_body.sql": "fe58f0c47ff38d90a1baa05ec00170571951300ec555a31368674a6d4f4500cc",
+    "rls.sql": "fe595c5513294965307ad8f139527c7ee49322566100ea1c2e5695b0bd57883f",
+    "rollback.sql": "95f9b25dfe2555a5d27ce894aba0afa30018cb972a5fe837ea6157f376deaaea",
+    "snapshot.sql": "0bf49de856444814a36eb07c5cc2b5fd655f76fb9beaebd7665ff94f5e6d1bc0",
+    "validate_stage3.py": "e7a5ed176ec1827b47ba8822ad44bd13a37afdfc861365371a3720631d32b48b",
+    "verify.sql": "4784f2b9f54067210ed242498ca2f7e45a67760372d173457bac4a9808fcea4d",
+    "../target_guard.psql": "d43d44ba5bcd394616c860e14e6aab671a5f8df354ccf7993380fc512ede5189"
+  }
+}

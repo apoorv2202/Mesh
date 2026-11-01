@@ -1,0 +1,27 @@
+-- Client-routing guard only; not a server-side project identity oracle.
+-- Must be invoked by the fixed-target launcher, never SQL Editor or --linked CLI.
+\set ON_ERROR_STOP on
+\if :{?vader_test_ref}
+\else
+SELECT jsonb_build_object('record_type','failure','code','TEST_REFERENCE_MISSING') AS diagnostic;
+DO $fail$ BEGIN RAISE EXCEPTION USING ERRCODE='42501', MESSAGE='TEST_REFERENCE_MISSING'; END $fail$;
+\endif
+\getenv vader_guard_host PGHOST
+\getenv vader_guard_user PGUSER
+\getenv vader_guard_port PGPORT
+\getenv vader_guard_database PGDATABASE
+SELECT
+ :'vader_test_ref' = 'ikmzxirldivefebgxzaa'
+ AND :'vader_test_ref' <> 'khweikfvsnervfuswhon'
+ AND :'vader_guard_port' = '5432'
+ AND :'vader_guard_database' = 'postgres'
+ AND (
+   (:'vader_guard_host' = 'db.ikmzxirldivefebgxzaa.supabase.co' AND :'vader_guard_user' = 'postgres')
+   OR (:'vader_guard_host' ~ '^[-a-z0-9]+[.]pooler[.]supabase[.]com$'
+       AND :'vader_guard_user' = 'postgres.ikmzxirldivefebgxzaa')
+ ) AS vader_target_ok \gset
+\if :vader_target_ok
+\else
+SELECT jsonb_build_object('record_type','failure','code','TEST_ROUTE_REJECTED') AS diagnostic;
+DO $fail$ BEGIN RAISE EXCEPTION USING ERRCODE='42501', MESSAGE='TEST_ROUTE_REJECTED'; END $fail$;
+\endif

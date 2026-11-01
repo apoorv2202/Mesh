@@ -1,0 +1,128 @@
+[
+  {
+    "name": "active_security_a",
+    "member": "A",
+    "role": "security_team",
+    "status": "active",
+    "identity": "A",
+    "metadata": "normal",
+    "expected": 1
+  },
+  {
+    "name": "active_security_b",
+    "member": "B",
+    "role": "security_team",
+    "status": "active",
+    "identity": "B",
+    "metadata": "normal",
+    "expected": 1
+  },
+  {
+    "name": "owner",
+    "member": "A",
+    "role": "owner",
+    "status": "active",
+    "identity": "A",
+    "metadata": "normal",
+    "expected": 0
+  },
+  {
+    "name": "hr",
+    "member": "A",
+    "role": "hr",
+    "status": "active",
+    "identity": "A",
+    "metadata": "normal",
+    "expected": 0
+  },
+  {
+    "name": "senior_developer",
+    "member": "A",
+    "role": "senior_developer",
+    "status": "active",
+    "identity": "A",
+    "metadata": "normal",
+    "expected": 0
+  },
+  {
+    "name": "junior_developer",
+    "member": "A",
+    "role": "junior_developer",
+    "status": "active",
+    "identity": "A",
+    "metadata": "normal",
+    "expected": 0
+  },
+  {
+    "name": "suspended",
+    "member": "A",
+    "role": "security_team",
+    "status": "suspended",
+    "identity": "A",
+    "metadata": "normal",
+    "expected": 0
+  },
+  {
+    "name": "offboarded",
+    "member": "A",
+    "role": "security_team",
+    "status": "offboarded",
+    "identity": "A",
+    "metadata": "normal",
+    "expected": 0
+  },
+  {
+    "name": "pending",
+    "member": "A",
+    "role": "security_team",
+    "status": "pending",
+    "identity": "A",
+    "metadata": "normal",
+    "expected": 0
+  },
+  {
+    "name": "outsider",
+    "member": "A",
+    "role": "security_team",
+    "status": "active",
+    "identity": "outsider",
+    "metadata": "normal",
+    "expected": 0
+  },
+  {
+    "name": "missing_identity",
+    "member": "A",
+    "role": "security_team",
+    "status": "active",
+    "identity": "missing",
+    "metadata": "normal",
+    "expected": 0
+  },
+  {
+    "name": "spoof_foreign_organization",
+    "member": "A",
+    "role": "security_team",
+    "status": "active",
+    "identity": "A",
+    "metadata": "spoof",
+    "expected": 1
+  },
+  {
+    "name": "metadata_role_escalation",
+    "member": "A",
+    "role": "junior_developer",
+    "status": "active",
+    "identity": "A",
+    "metadata": "spoof",
+    "expected": 0
+  },
+  {
+    "name": "invalid_identity",
+    "member": "A",
+    "role": "security_team",
+    "status": "active",
+    "identity": "invalid",
+    "metadata": "normal",
+    "expected": 0
+  }
+]

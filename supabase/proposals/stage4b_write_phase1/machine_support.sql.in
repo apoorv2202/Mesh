@@ -1,0 +1,53 @@
+-- Template injected into the revised, standalone Migration02 candidate.
+ALTER TABLE vader_private.principals ENABLE ROW LEVEL SECURITY;
+CREATE POLICY vader_principal_self_read ON vader_private.principals FOR SELECT TO vader_writer_owner
+ USING (principal_oid=(SELECT oid FROM pg_catalog.pg_roles WHERE rolname=session_user)
+        AND principal_name=session_user AND enabled);
+
+-- Narrow privileged authorization/locking helper. No API caller EXECUTE.
+-- postgres ownership permits row SHARE locks without granting config UPDATE to writer.
+CREATE FUNCTION vader_private.machine_scope_v1() RETURNS uuid
+LANGUAGE plpgsql SECURITY DEFINER SET search_path=pg_catalog,pg_temp AS $fn$
+DECLARE principal record; tenant uuid;
+BEGIN
+ SELECT oid,rolname,rolcanlogin,rolsuper,rolbypassrls,rolcreaterole,rolcreatedb
+ INTO principal FROM pg_catalog.pg_roles WHERE rolname=session_user;
+ IF NOT FOUND OR NOT principal.rolcanlogin OR principal.rolsuper OR principal.rolbypassrls
+ OR principal.rolcreaterole OR principal.rolcreatedb OR principal.rolname IN
+ ('postgres','authenticator','anon','authenticated','service_role') THEN
+ RAISE EXCEPTION USING ERRCODE='42501',MESSAGE='VADER machine denied'; END IF;
+ IF EXISTS(SELECT 1 FROM pg_catalog.pg_roles other WHERE other.oid<>principal.oid
+ AND other.rolname<>'vader_ingest' AND pg_catalog.pg_has_role(principal.oid,other.oid,'MEMBER')) THEN
+ RAISE EXCEPTION USING ERRCODE='42501',MESSAGE='VADER machine membership denied'; END IF;
+ SELECT p.organization_id INTO tenant FROM vader_private.principals p
+ WHERE p.principal_oid=principal.oid AND p.principal_name=principal.rolname AND p.enabled FOR SHARE;
+ IF tenant IS NULL THEN RAISE EXCEPTION USING ERRCODE='42501',MESSAGE='VADER machine binding denied'; END IF;
+ PERFORM 1 FROM public.organizations WHERE id=tenant AND status='active' FOR SHARE;
+ IF NOT FOUND THEN RAISE EXCEPTION USING ERRCODE='42501',MESSAGE='VADER organization denied'; END IF;
+ RETURN tenant;
+END $fn$;
+REVOKE ALL ON FUNCTION vader_private.machine_scope_v1() FROM PUBLIC,anon,authenticated,service_role,vader_ingest;
+GRANT EXECUTE ON FUNCTION vader_private.machine_scope_v1() TO vader_writer_owner;
+
+GRANT INSERT(id,organization_id,actor_user_id,action,target_type,target_id,metadata)
+ ON public.audit_logs TO vader_writer_owner;
+CREATE POLICY vader_machine_audit_insert ON public.audit_logs FOR INSERT TO vader_writer_owner
+ WITH CHECK (organization_id=vader_private.tenant_v1() AND actor_user_id IS NULL);
+
+CREATE FUNCTION vader_private.append_machine_audit_v1(action_name text,target_kind text,target_key text,request_id uuid)
+RETURNS uuid LANGUAGE plpgsql SECURITY INVOKER SET search_path=pg_catalog,pg_temp AS $fn$
+DECLARE audit_id uuid:=gen_random_uuid(); tenant uuid:=vader_private.tenant_v1();
+BEGIN
+ IF action_name IS NULL OR target_kind IS NULL OR action_name NOT IN ('event_ingested','finding_created','incident_created','incident_link_created','risk_created')
+ OR target_kind NOT IN ('security_events','security_findings','security_incidents','incident_events','security_risk_scores')
+ OR target_key IS NULL OR request_id IS NULL THEN RAISE EXCEPTION 'Invalid internal audit descriptor'; END IF;
+ INSERT INTO public.audit_logs(id,organization_id,actor_user_id,action,target_type,target_id,metadata)
+ VALUES(audit_id,tenant,NULL,'vader.'||action_name,target_kind,target_key,
+ jsonb_build_object('request_id',request_id,'principal_name',session_user,
+ 'principal_oid',(SELECT oid FROM pg_catalog.pg_roles WHERE rolname=session_user),
+ 'operation_version','vader-machine-write-r2'));
+ RETURN audit_id;
+END $fn$;
+ALTER FUNCTION vader_private.append_machine_audit_v1(text,text,text,uuid) OWNER TO vader_writer_owner;
+REVOKE ALL ON FUNCTION vader_private.append_machine_audit_v1(text,text,text,uuid)
+ FROM PUBLIC,anon,authenticated,service_role,vader_ingest;

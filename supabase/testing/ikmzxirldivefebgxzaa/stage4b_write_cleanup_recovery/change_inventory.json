@@ -1,0 +1,25 @@
+{
+  "modified_original_files": [],
+  "new_local_files": [
+    "ConsoleProbe.cs",
+    "Invoke-CleanupRecovery.ps1",
+    "README.md",
+    "Recovery-Support.ps1",
+    "Test-RecoveryOffline.ps1",
+    "VALIDATION_REPORT.md",
+    "change_inventory.json",
+    "pins.json",
+    "prepare_manifest.py",
+    "readiness.json",
+    "validate_offline.py"
+  ],
+  "original_manifest_sha256": "9ce235e2887aea69bc0772c09ff8e646412cb845ce97cfd8df96e6d52976df68",
+  "original_evidence_sha256": {
+    "runtime.txt": "a0bf348ce7a2a602e52da9b9385d02937b9b40d109e2e32bbbc461148234d53a",
+    "runtime.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runtime.receipt.json": "3b2eedc1cdfe3c417907909373c563c4c4ed0002b725c86747c46811ef1244a1",
+    "cleanup_check.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cleanup_check.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "cleanup_check.receipt.json": "da13a35090d634a258acea0dc25ab5bc7af200022051d0d7392dc46f9b930321"
+  }
+}

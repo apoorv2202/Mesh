@@ -1,0 +1,85 @@
+{
+  "purpose": "Disposable TEST reconstruction, not an identical production clone or production migration",
+  "allowed_test_ref": "ikmzxirldivefebgxzaa",
+  "blocked_production_ref": "khweikfvsnervfuswhon",
+  "source_sha256": {
+    "mesh_inspection.json": "0bb6b94031f1d0fe1fd843a20697ed49b4785b9c5e9696014e932c2b532d1fa4",
+    "vader_verification.json": "70171889939c159a71704d0df4731738361d2a4c53a7d36e5880210b2554bc44"
+  },
+  "test_preflight_sha256": "b029522ac959950eccf9f61a5bc19be799e869f1e0df40175e458612c8dc5e72",
+  "verified_test": {
+    "server": "17.11",
+    "database": "postgres",
+    "user": "postgres",
+    "read_only_capture": "on",
+    "superuser": false,
+    "schema_create_public": true
+  },
+  "source_capture_times": [
+    "2026-10-29T15:02:23.31302+00:00",
+    "2026-10-29T15:44:14.145446+00:00"
+  ],
+  "helper_definition_md5_cr_removed": {
+    "handle_new_mesh_user": "3bb9343702930b01734cb8588876479f",
+    "is_mesh_member": "c37b3477c4a3d064ecc5c18955fafdf0",
+    "rls_auto_enable": "846ec2fbff751d24b890656d63c3a9bf"
+  },
+  "bootstrap_sha256": "02b3dc6c26021227cef1a67b2591e0277b1d2c8b0ba059cdcb92d62599eb5fc4",
+  "expected": {
+    "application_tables": 18,
+    "columns": 165,
+    "constraints": 85,
+    "indexes": 46,
+    "policies": 18,
+    "enums": 2,
+    "public_helpers": 3,
+    "application_helpers_created": 2,
+    "native_helpers_reused": 1,
+    "custom_auth_user_trigger_created": 0,
+    "native_event_triggers_created_or_altered": 0,
+    "native_ensure_rls_reused": 1,
+    "application_rows_loaded": 0
+  },
+  "constraint_counts": {
+    "f": 35,
+    "p": 18,
+    "u": 11,
+    "c": 21
+  },
+  "nonconstraint_indexes_emitted": [
+    "audit_logs_org_created_idx",
+    "organization_invitations_org_idx",
+    "organization_members_user_idx",
+    "organizations_domain_unique",
+    "security_assets_org_type_idx",
+    "security_events_actor_time_idx",
+    "security_events_external_dedupe_idx",
+    "security_events_org_time_idx",
+    "security_findings_org_status_idx",
+    "security_incidents_org_status_idx",
+    "security_risk_scores_subject_idx",
+    "vader_rules_org_idx",
+    "vader_graph_edges_org_idx",
+    "vader_graph_nodes_org_idx",
+    "vader_actions_org_idx",
+    "vader_simulations_org_idx",
+    "vader_trust_org_user_idx"
+  ],
+  "sequence_exception": {
+    "source_invalid_max": "9223372036854776000",
+    "test_max": "9223372036854775807",
+    "reason": "PostgreSQL bigint type maximum; exact source value lost in JSON export",
+    "verified_production_max": false
+  },
+  "intentional_limits": [
+    "No managed schema, Auth records, database login roles or membership relationships copied",
+    "No creator-wide default ACL changes; current application objects get captured explicit ACLs",
+    "No original script order/comments, physical storage settings, current sequence counter or data recovered",
+    "Two offline captures; five-table definitions agree, not an atomic whole-database snapshot",
+    "Native rls_auto_enable and ensure_rls are verified/reused without CREATE/ALTER/GRANT/REVOKE on them",
+    "Auth-user provisioning trigger omitted: synthetic profiles need explicit TEST seeding; automatic Auth-to-profile provisioning is not covered",
+    "No public/auth/extensions schema ACL changes; native roles/ACLs/functions/events/defaults/noninternal Auth triggers are compared before/after",
+    "Application FKs to native auth.users still generate internal referential-integrity triggers/dependencies; not a zero-catalog-change clone",
+    "Actual DDL/function compilation and REFERENCES authority are guarded runtime checks; custom-login/writer ownership tests remain later work"
+  ]
+}
